@@ -26,6 +26,22 @@ int main()
   List P = initializeList(test_P, 6);
   printLots(L, P);
   printf("\n");
+
+  printf("TEST: swap\n");
+  swap(L, 44);
+  printList(L);
+  printf("\n");
+  swap(L, -1);
+  printList(L);
+  printf("\n");
+  swap(L, 45);
+  printList(L);
+  printf("\n");
+  ET test_Q[] = {1,3,2,3,4};
+  List Q = initializeList(test_Q, 5);
+  swap(Q, 3);
+  printList(Q);
+  printf("\n");
   
   return 0;
 }
@@ -126,5 +142,38 @@ printLots(List L, List P)
     }
     outofelement = 0;
     dummyP = dummyP->Next;
+  }
+}
+
+void swap(List L, ET elem)
+{
+  Pos dummyCurrent = L->Next;
+  Pos dummyPrev = L->Next;
+  Pos dummyCurrentNext;
+  
+  while(dummyCurrent != NULL)
+  {
+    if (dummyCurrent->Element == elem)
+    {
+      dummyCurrentNext = dummyCurrent->Next;
+      // let's do swap
+      if (dummyCurrentNext != NULL)
+      {
+        dummyPrev->Next = dummyCurrentNext;
+        dummyCurrent->Next = dummyCurrentNext->Next;
+        dummyCurrentNext->Next = dummyCurrent;
+        break;
+      }
+      else
+      {
+        printf("Cannot swap because of the %d is the last node\n", elem);
+        break;
+      }
+    }
+    else
+    {
+      dummyPrev = dummyCurrent;
+      dummyCurrent = dummyCurrent->Next;
+    }
   }
 }
