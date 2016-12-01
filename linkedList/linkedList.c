@@ -8,44 +8,6 @@ struct Node
   Pos Next;
 };
 
-int main()
-{
-  ET test_L[] = {23, 44, 45, 57, 89, -1};
-  List L = initializeList(test_L, 6);
-
-  printf("TEST: printList\n");
-  if(L != NULL)
-  {
-    /* test printList */
-    printList(L);
-    printf ("\n");
-  }
-
-  printf("TEST: printLots\n");
-  ET test_P[] = {1,3,8,5,7,6};
-  List P = initializeList(test_P, 6);
-  printLots(L, P);
-  printf("\n");
-
-  printf("TEST: swap\n");
-  swap(L, 44);
-  printList(L);
-  printf("\n");
-  swap(L, -1);
-  printList(L);
-  printf("\n");
-  swap(L, 45);
-  printList(L);
-  printf("\n");
-  ET test_Q[] = {1,3,2,3,4};
-  List Q = initializeList(test_Q, 5);
-  swap(Q, 3);
-  printList(Q);
-  printf("\n");
-  
-  return 0;
-}
-
 static List
 initializeNoHeaderList(ET A[], int arrayLen)
 {
@@ -145,7 +107,8 @@ printLots(List L, List P)
   }
 }
 
-void swap(List L, ET elem)
+void
+swap(List L, ET elem)
 {
   Pos dummyCurrent = L->Next;
   Pos dummyPrev = L->Next;
@@ -176,4 +139,83 @@ void swap(List L, ET elem)
       dummyCurrent = dummyCurrent->Next;
     }
   }
+}
+
+// O(MN)
+static List
+intersectionSortedLists1(List L, List P)
+{
+  Pos dummyL = L->Next;
+  Pos dummyP = P->Next;
+  List R = malloc(sizeof(struct Node));
+  Pos dummyR = R;
+  int bookkeeping[100]={0}; // prevent duplicate appearance in R
+  
+  while(dummyL != NULL)
+  {
+    if (dummyL->Element == dummyP->Element && bookkeeping[dummyP->Element] == 0)
+    {
+      bookkeeping[dummyP->Element] = 1;
+      // insert a node, can be refactored
+      Pos tmpNode;
+      tmpNode = malloc(sizeof(struct Node));
+      tmpNode->Element = dummyL->Element;
+      tmpNode->Next = dummyR->Next;
+      dummyR->Next = tmpNode;
+      dummyR = tmpNode;
+    }
+    dummyP = dummyP->Next;
+    if (dummyP == NULL)
+    {
+      dummyL = dummyL->Next;
+      dummyP = P->Next;
+    }
+  }
+  return R;
+}
+
+//O(max(M,N)), utilized info that input lists are sorted
+static List
+intersectionSortedLists2(List L, List P)
+{
+  Pos dummyL = L->Next;
+  Pos dummyP = P->Next;
+  List R = malloc(sizeof(struct Node));
+  Pos dummyR = R;
+  int bookkeeping[100]={0}; // prevent duplicate appearance in R
+  
+  while(dummyL != NULL && dummyP != NULL)
+  {
+    if (dummyL->Element < dummyP->Element)
+    {
+      dummyL = dummyL->Next;
+    }
+    else if (dummyL->Element > dummyP->Element)
+    {
+      dummyP = dummyP->Next;
+    }
+    else
+    {
+      if (bookkeeping[dummyL->Element] == 0)
+      {
+        bookkeeping[dummyL->Element] = 1;
+        Pos tmpNode;
+        tmpNode = malloc(sizeof(struct Node));
+        tmpNode->Element = dummyL->Element;
+        tmpNode->Next = dummyR->Next;
+        dummyR->Next = tmpNode;
+        dummyR = tmpNode;
+      }
+      dummyL = dummyL->Next;
+      dummyP = dummyP->Next;
+    }
+  }
+  return R;
+}
+
+List
+intersectionSortedLists(List L, List P)
+{
+  //return intersectionSortedLists1(List L, List P);
+  return intersectionSortedLists2(L, P);
 }

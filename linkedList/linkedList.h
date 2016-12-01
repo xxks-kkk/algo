@@ -41,3 +41,9 @@ void printLots(List L, List P);
  * is the last node, then print "Cannot swap because of the elem is the last node"
  */
 void swap(List L, ET elem);
+
+/* 3.4 Given two sorted lists, L and P, write a procedure to compute the
+ * intersection of two lists using only the basic list operations.
+ * the result will be a list, R.
+ */
+List intersectionSortedLists(List L, List P);
