@@ -16,6 +16,9 @@ typedef PtrToNode Pos;
 
 /** BASIC LIST OPERATION **/
 
+/* Insert (after legal position P)
+ */
+void insert(ET elem, List L, Pos position);
 
 
 /** VARIOUS LIST PROBLEMS **/

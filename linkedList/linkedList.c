@@ -8,6 +8,21 @@ struct Node
   Pos Next;
 };
 
+void
+insert(ET elem, List L, Pos position)
+{
+  Pos tmpNode;
+  tmpNode = malloc(sizeof(struct Node));
+  if (tmpNode == NULL)
+  {
+    exit(EXIT_FAILURE);
+  }
+  tmpNode->Element = elem;
+  tmpNode->Next = position->Next;
+  position->Next = tmpNode;
+}
+
+
 static List
 initializeNoHeaderList(ET A[], int arrayLen)
 {
@@ -157,12 +172,13 @@ intersectionSortedLists1(List L, List P)
     {
       bookkeeping[dummyP->Element] = 1;
       // insert a node, can be refactored
-      Pos tmpNode;
-      tmpNode = malloc(sizeof(struct Node));
-      tmpNode->Element = dummyL->Element;
-      tmpNode->Next = dummyR->Next;
-      dummyR->Next = tmpNode;
-      dummyR = tmpNode;
+      /* Pos tmpNode; */
+      /* tmpNode = malloc(sizeof(struct Node)); */
+      /* tmpNode->Element = dummyL->Element; */
+      /* tmpNode->Next = dummyR->Next; */
+      /* dummyR->Next = tmpNode; */
+      insert(dummyL->Element, R, dummyR);
+      dummyR = dummyR->Next;
     }
     dummyP = dummyP->Next;
     if (dummyP == NULL)
@@ -199,12 +215,13 @@ intersectionSortedLists2(List L, List P)
       if (bookkeeping[dummyL->Element] == 0)
       {
         bookkeeping[dummyL->Element] = 1;
-        Pos tmpNode;
-        tmpNode = malloc(sizeof(struct Node));
-        tmpNode->Element = dummyL->Element;
-        tmpNode->Next = dummyR->Next;
-        dummyR->Next = tmpNode;
-        dummyR = tmpNode;
+        /* Pos tmpNode; */
+        /* tmpNode = malloc(sizeof(struct Node)); */
+        /* tmpNode->Element = dummyL->Element; */
+        /* tmpNode->Next = dummyR->Next; */
+        /* dummyR->Next = tmpNode; */
+        insert(dummyL->Element, R, dummyR);
+        dummyR = dummyR->Next;
       }
       dummyL = dummyL->Next;
       dummyP = dummyP->Next;
