@@ -8,6 +8,8 @@ struct Node
   Pos Next;
 };
 
+/**---- BASIC LIST OPERATION ----**/
+
 void
 insert(ET elem, List L, Pos position)
 {
@@ -22,6 +24,23 @@ insert(ET elem, List L, Pos position)
   position->Next = tmpNode;
 }
 
+void
+deleteList(List L)
+{
+  Pos dummyL, tmp;
+  dummyL = L->Next;
+  L->Next = NULL;
+  
+  while(dummyL != NULL)
+  {
+    tmp = dummyL->Next;
+    free(dummyL);
+    dummyL = tmp;
+  }
+}
+
+
+/**---- VARIOUS LIST PROBLEMS ----**/
 
 static List
 initializeNoHeaderList(ET A[], int arrayLen)
@@ -309,4 +328,23 @@ unionSortedLists(List L, List P)
   }
 
   return R;
+}
+
+void
+reverseList(List L)
+{
+  Pos dummyL = L->Next;
+  List R = malloc(sizeof(struct Node));
+  
+  while (dummyL != NULL)
+  {
+    Pos tmpNode = malloc(sizeof(struct Node));
+    tmpNode->Element = dummyL->Element;
+    tmpNode->Next = R->Next;
+    R->Next = tmpNode;
+    dummyL = dummyL->Next;
+  }
+  
+  L = R;
+  deleteList(R);
 }

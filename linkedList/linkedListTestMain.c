@@ -56,5 +56,10 @@ int main()
   printList(R);
   printf("\n");
   
+  printf("TEST: reverseList\n");
+  reverseList(Q31);
+  printList(Q31);
+  printf("\n");
+  
   return 0;
 }

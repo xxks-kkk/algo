@@ -14,14 +14,19 @@ typedef PtrToNode Pos;
 
 #endif
 
-/** BASIC LIST OPERATION **/
+/**---- BASIC LIST OPERATION ----**/
 
 /* Insert (after legal position P)
  */
 void insert(ET elem, List L, Pos position);
 
+/* We don't delete the header node
+ */
+void deleteList(List L);
 
-/** VARIOUS LIST PROBLEMS **/
+
+
+/**---- VARIOUS LIST PROBLEMS ----**/
 
 /* initialize a singly linked list from a given array
  */
@@ -55,3 +60,6 @@ List intersectionSortedLists(List L, List P);
  */
 List unionSortedLists(List L, List P);
    
+/* 3.12.a write a nonrecursive procedure to reverse a singly linked list in O(N) time.
+ */
+void reverseList(List L);
