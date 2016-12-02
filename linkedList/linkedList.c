@@ -156,7 +156,8 @@ swap(List L, ET elem)
   }
 }
 
-// O(MN)
+/* O(MN)
+ */
 static List
 intersectionSortedLists1(List L, List P)
 {
@@ -190,7 +191,8 @@ intersectionSortedLists1(List L, List P)
   return R;
 }
 
-//O(max(M,N)), utilized info that input lists are sorted
+/* O(max(M,N)), utilized info that input lists are sorted
+ */
 static List
 intersectionSortedLists2(List L, List P)
 {
@@ -235,4 +237,76 @@ intersectionSortedLists(List L, List P)
 {
   //return intersectionSortedLists1(List L, List P);
   return intersectionSortedLists2(L, P);
+}
+
+/* understand the following logic
+ * by drawing a venn graph of two sets
+ */
+List
+unionSortedLists(List L, List P)
+{
+  Pos dummyL = L->Next;
+  Pos dummyP = P->Next;
+  List R = malloc(sizeof(struct Node));
+  Pos dummyR = R;
+  ET bookkeeping[100] = {0}; // prevent the duplicates
+  
+  while (dummyL != NULL && dummyP != NULL)
+  {
+    if (dummyL->Element < dummyP->Element)
+    {
+      if (bookkeeping[dummyL->Element] == 0)
+      {
+        insert(dummyL->Element, R, dummyR);
+        bookkeeping[dummyL->Element] = 1;
+        dummyR = dummyR->Next;
+      }
+      dummyL = dummyL->Next;
+    }
+    else if (dummyL->Element > dummyP->Element)
+    {
+      if (bookkeeping[dummyP->Element] == 0)
+      {
+        insert(dummyP->Element, R, dummyR);
+        bookkeeping[dummyP->Element] = 1;
+        dummyR = dummyR->Next;
+      }
+      dummyP = dummyP->Next;
+    }
+    else
+    {
+      if (bookkeeping[dummyP->Element] == 0)
+      {
+        insert(dummyP->Element, R, dummyR);
+        bookkeeping[dummyP->Element] = 1;
+        dummyR = dummyR->Next;
+      }
+      dummyP = dummyP->Next;
+      dummyL = dummyL->Next;
+    }
+  }
+
+  while (dummyL != NULL)
+  {
+    if (bookkeeping[dummyL->Element] == 0)
+    {
+      insert(dummyL->Element, R, dummyR);
+      bookkeeping[dummyL->Element] = 1;
+      dummyR = dummyR->Next;
+    }
+    dummyL = dummyL->Next;
+  }
+
+  while (dummyP != NULL)
+  {
+    if (bookkeeping[dummyP->Element] == 0)
+    {
+      insert(dummyP->Element, R, dummyR);
+      bookkeeping[dummyP->Element] = 1;
+      dummyR = dummyR->Next;
+    }
+    dummyP = dummyP->Next;
+  }
+
+  return R;
 }

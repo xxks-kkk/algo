@@ -4,8 +4,9 @@
 
 int main()
 {
+  List L, P, Q, Q1, Q2, R; 
   ET test_L[] = {23, 44, 45, 57, 89, -1};
-  List L = initializeList(test_L, 6);
+  L = initializeList(test_L, 6);
 
   printf("TEST: printList\n");
   if(L != NULL)
@@ -17,7 +18,7 @@ int main()
 
   printf("TEST: printLots\n");
   ET test_P[] = {1,3,8,5,7,6};
-  List P = initializeList(test_P, 6);
+  P = initializeList(test_P, 6);
   printLots(L, P);
   printf("\n");
 
@@ -32,7 +33,7 @@ int main()
   printList(L);
   printf("\n");
   ET test_Q[] = {1,3,2,3,4};
-  List Q = initializeList(test_Q, 5);
+  Q = initializeList(test_Q, 5);
   swap(Q, 3);
   printList(Q);
   printf("\n");
@@ -40,9 +41,20 @@ int main()
   printf("TEST: intersectionSortedLists\n");
   ET test_Q1[] = {1,2,3,3};
   ET test_Q2[] = {1,3,3};
-  List Q1 = initializeList(test_Q1, 4);
-  List Q2 = initializeList(test_Q2, 3);
-  List R = intersectionSortedLists(Q1, Q2);
+  Q1 = initializeList(test_Q1, 4);
+  Q2 = initializeList(test_Q2, 3);
+  R = intersectionSortedLists(Q1, Q2);
   printList(R);
+  printf("\n");
+
+  printf("TEST: unionSortedLists\n");
+  ET test_Q31[] = {1,3,3};
+  ET test_Q32[] = {2,3,4,5};
+  List Q31 = initializeList(test_Q31, 3);
+  List Q32 = initializeList(test_Q32, 4);
+  R = unionSortedLists(Q31, Q32);
+  printList(R);
+  printf("\n");
+  
   return 0;
 }

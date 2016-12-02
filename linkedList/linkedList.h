@@ -47,6 +47,11 @@ void swap(List L, ET elem);
 
 /* 3.4 Given two sorted lists, L and P, write a procedure to compute the
  * intersection of two lists using only the basic list operations.
- * the result will be a list, R.
  */
 List intersectionSortedLists(List L, List P);
+
+/* 3.5 Given two sorted lists, L and P, write a procedure to compute L1 union L2
+ * using only the basic list operations.
+ */
+List unionSortedLists(List L, List P);
+   
