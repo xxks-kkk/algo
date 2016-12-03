@@ -342,11 +342,13 @@ reverseList(List L)
   
   while (dummyL != NULL)
   {
-    Pos tmpNode = malloc(sizeof(struct Node));
-    tmpNode->Element = dummyL->Element;
+    // Remove element from old list.
+    Pos tmpNode = dummyL;
+    dummyL = dummyL->Next;
+
+    // Insert element in new list.
     tmpNode->Next = R->Next;
     R->Next = tmpNode;
-    dummyL = dummyL->Next;
   }
   return R;
 }
