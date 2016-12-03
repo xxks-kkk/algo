@@ -20,7 +20,8 @@ typedef PtrToNode Pos;
  */
 void insert(ET elem, List L, Pos position);
 
-/* We don't delete the header node
+/* We don't delete the header node. 
+ * In other words, the empty list contains a header node.
  */
 void deleteList(List L);
 
@@ -62,4 +63,10 @@ List unionSortedLists(List L, List P);
    
 /* 3.12.a write a nonrecursive procedure to reverse a singly linked list in O(N) time.
  */
-void reverseList(List L);
+List reverseList(List L);
+
+/* 3.12.b write a nonrecursive procedure to reverse a singly linked list in O(N) time
+ * using constant extra space.
+ */
+void reverseListIterative(List L);
+void reverseListRecursive(List L);

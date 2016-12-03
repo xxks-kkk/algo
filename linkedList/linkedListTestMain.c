@@ -57,8 +57,14 @@ int main()
   printf("\n");
   
   printf("TEST: reverseList\n");
-  reverseList(Q31);
-  printList(Q31);
+  //Q31 = reverseList(Q31);
+  ET test_Q33[] = {1,2,3};
+  List Q33 = initializeList(test_Q33, 3);
+  reverseListIterative(Q33);
+  printList(Q33);
+  printf("\n");
+  reverseListRecursive(Q33);
+  printList(Q33);
   printf("\n");
   
   return 0;

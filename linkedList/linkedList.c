@@ -191,7 +191,6 @@ intersectionSortedLists1(List L, List P)
     if (dummyL->Element == dummyP->Element && bookkeeping[dummyP->Element] == 0)
     {
       bookkeeping[dummyP->Element] = 1;
-      // insert a node, can be refactored
       /* Pos tmpNode; */
       /* tmpNode = malloc(sizeof(struct Node)); */
       /* tmpNode->Element = dummyL->Element; */
@@ -210,7 +209,7 @@ intersectionSortedLists1(List L, List P)
   return R;
 }
 
-/* O(max(M,N)), utilized info that input lists are sorted
+/* O(M+N), utilized info that input lists are sorted
  */
 static List
 intersectionSortedLists2(List L, List P)
@@ -330,7 +329,12 @@ unionSortedLists(List L, List P)
   return R;
 }
 
-void
+/* The idea for this routine is quite simple:
+ * We basically go through the original list, and insert node we visit
+ * at the very beginning of the new list (just like a stack). Then,
+ * we return the new list.
+ */
+List
 reverseList(List L)
 {
   Pos dummyL = L->Next;
@@ -344,7 +348,78 @@ reverseList(List L)
     R->Next = tmpNode;
     dummyL = dummyL->Next;
   }
-  
-  L = R;
-  deleteList(R);
+  return R;
+}
+
+/* This routine is list here for legacy reason.
+ * It works but the code itself is not as clean
+ * as reverseListIterative
+ *
+ * dummyCurrent->Next = NULL is wrong b/c
+ * instead of break the link between 3 and 2,
+ * it actually breaks the link between 2 and 1,
+ * which we just created. That's why
+ * when we reverse 1->2->3, 3->2-> got printed 
+ * instead of 3->2->1
+ */ 
+/* void */
+/* reverseListIterative(List L) */
+/* { */
+/*   Pos dummyCurrent = L->Next, */
+/*       dummyNext = dummyCurrent->Next, */
+/*       dummyNextNext; */
+
+/*   while(dummyCurrent != NULL) */
+/*   { */
+/*     dummyNextNext = dummyNext->Next; */
+
+/*     dummyNext->Next = dummyCurrent; */
+/*     L->Next->Next = NULL; //dummyCurrent->Next = NULL; // is wrong (be careful) */
+/*     dummyCurrent = dummyNext; */
+/*     dummyNext = dummyNextNext; */
+
+/*     if (dummyNext == NULL) */
+/*     { */
+/*       L->Next = dummyCurrent; */
+/*       break; */
+/*     } */
+/*   } */
+/* } */
+
+void
+reverseListIterative(List L)
+{
+  Pos dummyCurrent = L->Next,
+      dummyPrev = NULL,
+      dummyNext;
+
+  while (dummyCurrent != NULL)
+  {
+    dummyNext = dummyCurrent->Next;
+    dummyCurrent->Next = dummyPrev;
+    dummyPrev = dummyCurrent;
+    dummyCurrent = dummyNext;
+  }
+  L->Next = dummyPrev;
+}
+
+static List P;
+static void
+reverseListRecursiveHelper(List L)
+{
+  if (L->Next == NULL)
+  {
+    P = L;
+    return;
+  }
+  reverseListRecursiveHelper(L->Next);
+  L->Next->Next = L;
+  L->Next = NULL;
+}
+
+void
+reverseListRecursive(List L)
+{
+  reverseListRecursiveHelper(L->Next);
+  L->Next = P;
 }
