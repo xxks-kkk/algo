@@ -38,7 +38,15 @@ printPolynomial(Polynomial A)
   }
   printf("\n");
 }
-    
+
+/* Runtime analysis: The first while loop iterates min{M,N}
+ * times, with a constant amount of work being done at each
+ * iteration. Whichever of the last two while loops iterates
+ * max{M,N} - min{M,N} times, and again a constant amount of 
+ * work gets done at each iteration. Therefore the program
+ * has O(min{M,N}+(max{M,N}-min{M,N})) = O(max{M,N}) running
+ * time.
+ */
 Polynomial
 add(Polynomial A, Polynomial B)
 {
