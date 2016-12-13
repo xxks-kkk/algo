@@ -4,6 +4,11 @@
 
 int main()
 {
+
+  printf("///////////////////////\n");
+  printf("// LINKED LIST TEST\n");
+  printf("///////////////////////\n\n");
+  
   List L, P, Q, Q1, Q2, R; 
   ET test_L[] = {23, 44, 45, 57, 89, -1};
   L = initializeList(test_L, 6);

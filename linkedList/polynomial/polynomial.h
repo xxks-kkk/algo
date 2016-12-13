@@ -18,11 +18,25 @@ typedef PtrToNode Polynomial;
 
 #endif
 
+/**---- BASIC LIST OPERATION POLYNOMIAL VERSION ----**/
+
+/* Insert (after legal term P)
+ */
+void insert(int coefficent, int exponent, PtrToNode p);
+
+
+/**---- VARIOUS POLYNOMIAL PROBLEMS ----**/
+
 /* Create a polynomial from given arrays.
  * The first input array represents all the coefficients of the polynomial.
  * The second input array represents all the corresponding exponents.
  */
-Polynomial initializePolynomial(int coefficient[], int exponent[]);
+Polynomial initializePolynomial(int coefficient[], int exponent[], int numterms);
+
+/* Print out a polynomial
+ * The format looks like {coefficient, exponent}->{coefficient, exponent}->...
+ */
+void printPolynomial(Polynomial A);
 
 
 /* 3.6 Write a function to add two polynomials. Do not
