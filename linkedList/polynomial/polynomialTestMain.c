@@ -23,6 +23,16 @@ int main()
   Polynomial C11 = add(A0,D1);
   printPolynomial(C10);
   printPolynomial(C11);
+
+  printf("TEST: multiply two Polynomials\n");
+  int coefficient20[] = {3,2};
+  int exponent20[] = {2,3};
+  int coefficient21[] = {5,6};
+  int exponent21[] = {4,5};
+  Polynomial B2 = initializePolynomial(coefficient20, exponent20, 2);
+  Polynomial B3 = initializePolynomial(coefficient21, exponent21, 2);
+  Polynomial C20 = multiply1(B2,B3);
+  printPolynomial(C20);
   
   return 0;
 }

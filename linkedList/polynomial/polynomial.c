@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include "polynomial.h"
 
-void insert(int coefficent, int exponent, PtrToNode p)
+void
+insert(int coefficent, int exponent, PtrToNode p)
 {
   PtrToNode tmpNode = malloc(sizeof(struct Node));
   tmpNode->coefficient = coefficent;
@@ -33,7 +34,7 @@ printPolynomial(Polynomial A)
 
   while (dummyA != NULL)
   {
-    printf("{%d, %d}->", dummyA->coefficient, dummyA->exponent);
+    printf("%d * X^%d + ", dummyA->coefficient, dummyA->exponent);
     dummyA = dummyA->Next;
   }
   printf("\n");
@@ -93,4 +94,63 @@ add(Polynomial A, Polynomial B)
   }
 
   return C;
+}
+
+/* Runtime analysis: we start from the inner most two while loops.
+ * Since R is initially empty, the loop only carry out once.
+ * As we do the multiplication of two terms from A and B, the
+ * output polynomial grows to maximum M*N terms. So, we have
+ * (1 + 2 + ... + M*N). Then, we will repeat for M times due to the
+ * outer most while loop. So, the runtime is O(M(1+2+3+ ... + M*N)), 
+ * which is O(M^2 N^2).
+ */
+Polynomial
+multiply1(Polynomial A, Polynomial B)
+{
+  Polynomial R = malloc(sizeof(struct Node));
+  PtrToNode dummyRPrev = R;
+  PtrToNode dummyR = R;
+  PtrToNode dummyA = A->Next;
+  PtrToNode dummyB = B->Next;
+
+  int tmpExponent, tmpCoefficient;
+  
+  while (dummyA != NULL)
+  {
+    while (dummyB != NULL)
+    {
+      tmpExponent = dummyA->exponent + dummyB->exponent;
+      tmpCoefficient = dummyA->coefficient * dummyB->coefficient;
+
+      // we go through the output polynomial to see if there is
+      // a term with the same exponent as our tmpExponent.
+      while (dummyR != NULL)
+      {
+        if (dummyR->exponent == tmpExponent)
+        {
+          dummyR->coefficient = dummyR->coefficient + tmpCoefficient;
+          break;
+        }
+        else
+        {
+          dummyRPrev = dummyR;
+          dummyR = dummyR->Next;
+        }
+      }
+
+      // We couldn't find the term with the same exponent, so we create
+      // a new term in our output polynomial.
+      if (dummyR == NULL)
+      {
+        insert(tmpCoefficient, tmpExponent, dummyRPrev);
+      }
+      
+      dummyR = R;
+      dummyB = dummyB->Next;
+    }
+    dummyB = B->Next;
+    dummyA = dummyA->Next;
+  }
+
+  return R;
 }

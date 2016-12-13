@@ -41,5 +41,13 @@ void printPolynomial(Polynomial A);
 
 /* 3.6 Write a function to add two polynomials. Do not
  * destroy the input. Use a linked list implementation.
+ * We assume the input polynomials are sorted in ascending order.
  */
 Polynomial add(Polynomial A, Polynomial B);
+
+/* 3.7 Write a function to multiply two polynomials, using a linked list 
+ * implementation. You must make sure that the output polynomial is sorted
+ * by exponent and has at most one term of any power.
+ * We assume the output is sorted in descending order.
+ */
+Polynomial multiply1(Polynomial A, Polynomial B);
