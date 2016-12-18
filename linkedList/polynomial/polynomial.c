@@ -12,6 +12,20 @@ insert(int coefficent, int exponent, PtrToNode p)
   p->Next = tmpNode;
 }
 
+void
+deletePolynomial(Polynomial A)
+{
+  PtrToNode dummyA = A->Next, tmp;
+  A->Next = NULL;
+  
+  while(dummyA != NULL)
+  {
+    tmp = dummyA->Next;
+    free(dummyA);
+    dummyA = tmp;
+  }
+}
+
 Polynomial
 initializePolynomial(int coefficient[], int exponent[], int numterms)
 {
@@ -96,13 +110,12 @@ add(Polynomial A, Polynomial B)
   return C;
 }
 
-/* Runtime analysis: we start from the inner most two while loops.
- * Since R is initially empty, the loop only carry out once.
- * As we do the multiplication of two terms from A and B, the
- * output polynomial grows to maximum M*N terms. So, we have
- * (1 + 2 + ... + M*N). Then, we will repeat for M times due to the
- * outer most while loop. So, the runtime is O(M(1+2+3+ ... + M*N)), 
- * which is O(M^2 N^2).
+/* Runtime analysis: we start from the inner most while loops.
+ * We traverse through the output polynomials to see if there is 
+ * a term with the same exponent. The output polynomial has at most
+ * M*N terms. Then for the middle loop, we iterate through N times.
+ * And for outer most loop, we iterate through M times. So, the
+ * total run time is O(M*N*MN) = O(M^2 N^2)
  */
 Polynomial
 multiply1(Polynomial A, Polynomial B)
@@ -153,4 +166,58 @@ multiply1(Polynomial A, Polynomial B)
   }
 
   return R;
+}
+
+Polynomial
+multiply2(Polynomial A, Polynomial B)
+{
+  int lenA = 0, lenB = 0;
+  PtrToNode dummyA = A->Next;
+  PtrToNode dummyB = B->Next;
+  Polynomial R = malloc(sizeof(struct Node));
+  PtrToNode dummyTmp, dummyShort, dummyLong, Long;
+  Polynomial Tmp = malloc(sizeof(struct Node));  
+
+  while(dummyA != NULL)
+  {
+    lenA++;
+    dummyA = dummyA->Next;
+  }
+
+  while(dummyB != NULL)
+  {
+    lenB++;
+    dummyB = dummyB->Next;
+  }
+
+  if (lenA < lenB)
+  {
+    dummyShort = A->Next;
+    dummyLong = B->Next;
+    Long = B;
+  }
+  else
+  {
+    dummyShort = B->Next;
+    dummyLong = A->Next;
+    Long = A;
+  }
+
+  while(dummyShort != NULL)
+  {
+    dummyTmp = Tmp;
+    while(dummyLong != NULL)
+    {
+      int coefficient = dummyShort->coefficient * dummyLong->coefficient;
+      int exponent = dummyShort->exponent + dummyLong->exponent;
+      insert(coefficient, exponent, dummyTmp);
+      dummyLong = dummyLong->Next;
+    }
+    R = add(R, Tmp);
+    dummyLong = Long->Next;
+    deletePolynomial(Tmp);
+    dummyShort = dummyShort->Next;
+  }
+
+  return R; 
 }

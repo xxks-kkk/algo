@@ -25,6 +25,7 @@ int main()
   printPolynomial(C11);
 
   printf("TEST: multiply two Polynomials\n");
+  printf("Algorithm 1\n");
   int coefficient20[] = {3,2};
   int exponent20[] = {2,3};
   int coefficient21[] = {5,6};
@@ -33,6 +34,10 @@ int main()
   Polynomial B3 = initializePolynomial(coefficient21, exponent21, 2);
   Polynomial C20 = multiply1(B2,B3);
   printPolynomial(C20);
+
+  printf("Algorithm 2\n");
+  Polynomial C21 = multiply2(B2,B3);
+  printPolynomial(C21);
   
   return 0;
 }

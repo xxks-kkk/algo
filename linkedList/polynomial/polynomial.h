@@ -24,6 +24,10 @@ typedef PtrToNode Polynomial;
  */
 void insert(int coefficent, int exponent, PtrToNode p);
 
+/* We don't delete the header node.
+ * In ohter words, the empty polynomial contains a header node.
+ */
+void deletePolynomial(Polynomial A);
 
 /**---- VARIOUS POLYNOMIAL PROBLEMS ----**/
 
@@ -50,4 +54,12 @@ Polynomial add(Polynomial A, Polynomial B);
  * by exponent and has at most one term of any power.
  * We assume the output is sorted in descending order.
  */
+
+/* 3.7.a Give an algorithm to solve this problem in O(M^2 N^2) time.
+ */
 Polynomial multiply1(Polynomial A, Polynomial B);
+
+/* 3.7.b Write a program to perform the multiplication in O(M^2 N) time, where
+ * M is the number of terms in the polynomial of fewer terms.
+ */
+Polynomial multiply2(Polynomial A, Polynomial B);
