@@ -287,3 +287,9 @@ multiply2(Polynomial A, Polynomial B)
 
   return R; 
 }
+ 
+Polynomial mutliply3(Polynomial A, Polynomial B)
+{
+  //TODO: code this function once I finish chapter 7 sorting
+  return NULL;
+}
