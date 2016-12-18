@@ -9,8 +9,8 @@ int main()
   printf("///////////////////////\n\n");
 
   printf("TEST: initializePolynomial\n");
-  int coefficient0[] = {1,2,3};
-  int exponent0[] = {1,2,3};
+  int coefficient0[] = {3,2,1};
+  int exponent0[] = {3,2,1};
   Polynomial A0 = initializePolynomial(coefficient0, exponent0, 3);
   printPolynomial(A0);
 
@@ -27,9 +27,9 @@ int main()
   printf("TEST: multiply two Polynomials\n");
   printf("Algorithm 1\n");
   int coefficient20[] = {3,2};
-  int exponent20[] = {2,3};
+  int exponent20[] = {3,2};
   int coefficient21[] = {5,6};
-  int exponent21[] = {4,5};
+  int exponent21[] = {5,4};
   Polynomial B2 = initializePolynomial(coefficient20, exponent20, 2);
   Polynomial B3 = initializePolynomial(coefficient21, exponent21, 2);
   Polynomial C20 = multiply1(B2,B3);

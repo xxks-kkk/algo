@@ -62,6 +62,57 @@ printPolynomial(Polynomial A)
  * has O(min{M,N}+(max{M,N}-min{M,N})) = O(max{M,N}) running
  * time.
  */
+// This version we assume the input polynomials exponent are in
+// ascending order.
+/* Polynomial */
+/* add(Polynomial A, Polynomial B) */
+/* { */
+/*   PtrToNode dummyA = A->Next; */
+/*   PtrToNode dummyB = B->Next; */
+/*   Polynomial C = malloc(sizeof(struct Node)); */
+/*   PtrToNode dummyC = C; */
+
+/*   while (dummyA != NULL && dummyB != NULL) */
+/*   { */
+/*     if (dummyA->exponent < dummyB->exponent) */
+/*     { */
+/*       insert(dummyA->coefficient, dummyA->exponent, dummyC); */
+/*       dummyC = dummyC->Next; */
+/*       dummyA = dummyA->Next; */
+/*     } */
+/*     else if (dummyA->exponent > dummyB->exponent) */
+/*     { */
+/*       insert(dummyB->coefficient, dummyB->exponent, dummyC); */
+/*       dummyC = dummyC->Next; */
+/*       dummyB = dummyB->Next; */
+/*     } */
+/*     else */
+/*     { */
+/*       insert(dummyA->coefficient + dummyB->coefficient, dummyB->exponent, dummyC); */
+/*       dummyC = dummyC->Next; */
+/*       dummyA = dummyA->Next; */
+/*       dummyB = dummyB->Next; */
+/*     } */
+/*   } */
+  
+/*   while(dummyA != NULL) */
+/*   { */
+/*     insert(dummyA->coefficient, dummyA->exponent, dummyC); */
+/*     dummyC = dummyC->Next; */
+/*     dummyA = dummyA->Next; */
+/*   } */
+
+/*   while(dummyB != NULL) */
+/*   { */
+/*     insert(dummyB->coefficient, dummyB->exponent, dummyC); */
+/*     dummyC = dummyC->Next; */
+/*     dummyB = dummyB->Next; */
+/*   } */
+
+/*   return C; */
+/* } */
+
+// This version we assume that the input polynomials exponent are in descending order
 Polynomial
 add(Polynomial A, Polynomial B)
 {
@@ -74,15 +125,15 @@ add(Polynomial A, Polynomial B)
   {
     if (dummyA->exponent < dummyB->exponent)
     {
-      insert(dummyA->coefficient, dummyA->exponent, dummyC);
-      dummyC = dummyC->Next;
-      dummyA = dummyA->Next;
-    }
-    else if (dummyA->exponent > dummyB->exponent)
-    {
       insert(dummyB->coefficient, dummyB->exponent, dummyC);
       dummyC = dummyC->Next;
       dummyB = dummyB->Next;
+    }
+    else if (dummyA->exponent > dummyB->exponent)
+    {
+      insert(dummyA->coefficient, dummyA->exponent, dummyC);
+      dummyC = dummyC->Next;
+      dummyA = dummyA->Next;
     }
     else
     {
@@ -109,6 +160,7 @@ add(Polynomial A, Polynomial B)
 
   return C;
 }
+
 
 /* Runtime analysis: we start from the inner most while loops.
  * We traverse through the output polynomials to see if there is 
@@ -168,6 +220,19 @@ multiply1(Polynomial A, Polynomial B)
   return R;
 }
 
+/* Runtime analysis: suppose polynomials A has M terms, and polynomials
+ * B has N terms. M < N.
+ * We instead of updating the result after each multiply, 
+ * multiply one term from A (the polynomials
+ * with fewer terms) by all the terms from B (the polynomials with 
+ * more terms) giving a sorted linked list of terms with length N.  
+ * Then we add this with the result linkedList using "add(...)".
+ * So, we have the following runtime:
+ * O(max(N,0)) + O(max(N,N)) + O(max(N,2N)) + ... + O(max(N, N(M-1))) = O(M^2 N)
+ * Also, we caluate the length of A taking O(M); we calculate the length of B taking
+ * O(N); we deleteList during the while loop taking O(MN). So, the total runtime is:
+ * O(M^2 N) + O(M) + O(N) + O(MN) = O(M^2 N) 
+ */
 Polynomial
 multiply2(Polynomial A, Polynomial B)
 {
@@ -211,6 +276,7 @@ multiply2(Polynomial A, Polynomial B)
       int coefficient = dummyShort->coefficient * dummyLong->coefficient;
       int exponent = dummyShort->exponent + dummyLong->exponent;
       insert(coefficient, exponent, dummyTmp);
+      dummyTmp = dummyTmp->Next;
       dummyLong = dummyLong->Next;
     }
     R = add(R, Tmp);

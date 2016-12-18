@@ -45,7 +45,7 @@ void printPolynomial(Polynomial A);
 
 /* 3.6 Write a function to add two polynomials. Do not
  * destroy the input. Use a linked list implementation.
- * We assume the input polynomials are sorted in ascending order.
+ * We assume the input polynomials are sorted in descending order.
  */
 Polynomial add(Polynomial A, Polynomial B);
 
