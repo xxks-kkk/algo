@@ -38,6 +38,14 @@ int main()
   printf("Algorithm 2\n");
   Polynomial C21 = multiply2(B2,B3);
   printPolynomial(C21);
+
+  printf("TEST: power of Polynomials\n");
+  int coefficient30[] = {1,1};
+  int exponent30[] = {1,0};
+  Polynomial B4 = initializePolynomial(coefficient30, exponent30, 2);
+  Polynomial C3 = powPolynomial(B4, 2);
+  printPolynomial(C3);
+  
   
   return 0;
 }

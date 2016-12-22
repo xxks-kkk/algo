@@ -66,3 +66,10 @@ Polynomial multiply2(Polynomial A, Polynomial B);
 /* 3.7.c Write a program to perform the multiplication in O(MNlog(MN)) time.
  */
 Polynomial mutliply3(Polynomial A, Polynomial B);
+
+/* 3.8 Write a program that takes a polynomial, F(X), and computes (F(x))^P.
+ */
+Polynomial powPolynomial(Polynomial A, int P);
+
+
+

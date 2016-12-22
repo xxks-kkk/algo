@@ -287,9 +287,34 @@ multiply2(Polynomial A, Polynomial B)
 
   return R; 
 }
- 
+
 Polynomial mutliply3(Polynomial A, Polynomial B)
 {
   //TODO: code this function once I finish chapter 7 sorting
   return NULL;
 }
+
+/* Runtime analysis: O(logP)
+ */
+Polynomial powPolynomial(Polynomial A, int P)
+{
+  if (P == 0)
+  {
+    Polynomial R = malloc(sizeof(struct Node));
+    insert(1, 0, R);
+    return R;
+  }
+  if (P == 1)
+  {
+    return A;
+  }
+  if (P % 2 == 0) // P is even
+  {
+    return powPolynomial(multiply2(A,A), P/2);
+  }
+  else
+  {
+    return multiply2(powPolynomial(multiply2(A,A), P/2), A);
+  }
+ 
+
