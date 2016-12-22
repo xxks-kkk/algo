@@ -90,6 +90,23 @@ printList(List L)
   }
 }
 
+static void
+printListReverseHelper(List L)
+{
+  if (L == NULL)
+  {
+    return;
+  }
+  printListReverseHelper(L->Next);
+  printf("%d->", L->Element);
+}
+
+void printListReverse(List L)
+{
+  Pos dummyL = L->Next;
+  printListReverseHelper(dummyL);
+}
+
 void
 printLots(List L, List P)
 {

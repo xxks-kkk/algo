@@ -37,6 +37,11 @@ List initializeList(ET A[], int arrayLen);
  */
 void printList(List L);
 
+/* print out the elements of a singly linked list 
+ * in reverse order
+ */
+void printListReverse(List L);
+
 /* 3.2 You are given a linked list, L, and another linked list, P,
  * containing integers sorted in acending order. The operation
  * printLots(L,P) will print the elements in L that are in positions
