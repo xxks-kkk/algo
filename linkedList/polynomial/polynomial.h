@@ -38,7 +38,6 @@ void deletePolynomial(Polynomial A);
 Polynomial initializePolynomial(int coefficient[], int exponent[], int numterms);
 
 /* Print out a polynomial
- * The format looks like {coefficient, exponent}->{coefficient, exponent}->...
  */
 void printPolynomial(Polynomial A);
 
@@ -64,6 +63,13 @@ Polynomial multiply1(Polynomial A, Polynomial B);
  */
 Polynomial multiply2(Polynomial A, Polynomial B);
 
+/* 3.7.c Write a program to perform the multiplication in O(MNlog(MN)) time.
+ */
+Polynomial mutliply3(Polynomial A, Polynomial B);
+
 /* 3.8 Write a program that takes a polynomial, F(X), and computes (F(x))^P.
  */
 Polynomial powPolynomial(Polynomial A, int P);
+
+
+
