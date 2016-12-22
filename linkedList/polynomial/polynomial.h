@@ -63,3 +63,7 @@ Polynomial multiply1(Polynomial A, Polynomial B);
  * M is the number of terms in the polynomial of fewer terms.
  */
 Polynomial multiply2(Polynomial A, Polynomial B);
+
+/* 3.8 Write a program that takes a polynomial, F(X), and computes (F(x))^P.
+ */
+Polynomial powPolynomial(Polynomial A, int P);
