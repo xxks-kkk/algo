@@ -14,12 +14,10 @@ int main()
   L = initializeList(test_L, 6);
 
   printf("TEST: printList\n");
-  if(L != NULL)
-  {
-    /* test printList */
-    printList(L);
-    printf ("\n");
-  }
+  printList(L);
+  printf ("\n");
+  printListReverse(L);
+  printf ("\n");
 
   printf("TEST: printLots\n");
   ET test_P[] = {1,3,8,5,7,6};
