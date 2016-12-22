@@ -316,5 +316,5 @@ Polynomial powPolynomial(Polynomial A, int P)
   {
     return multiply2(powPolynomial(multiply2(A,A), P/2), A);
   }
- 
+} 
 
