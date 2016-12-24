@@ -31,6 +31,8 @@ int main()
   printf("\n");
   printIntegerList(add(int0, int4));
   printf("\n");
-  
+
+  printf("TEST: multiply\n");
+  printIntegerList(multiply(int0, int1));
   return 0;
 }

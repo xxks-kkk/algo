@@ -30,6 +30,11 @@ struct Node
  */
 integerList initializeInteger(int digits[], int numDigits);
 
+/* Delete the whole integerList and 
+ * we keep the header node.
+ */
+void deleteIntegerList(integerList L);
+
 /* Add the digit immediately after the PtrToNode
  */
 void addDigit(int digit, PtrToNode P);
@@ -38,6 +43,10 @@ void addDigit(int digit, PtrToNode P);
  */
 void printIntegerList(integerList L);
 
-/* Add two integers
+/* Add two non-negative integers
  */
 integerList add(integerList A, integerList B);
+
+/* Mutiply two non-negative integers
+ */
+integerList multiply(integerList A, integerList B);
