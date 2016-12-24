@@ -85,7 +85,7 @@ printList(List L)
 
   while (dummy != NULL)
   {
-    printf("%d->", dummy->Element);
+    printf("%d%s", dummy->Element, (dummy->Next) ? ("->") : (""));
     dummy = dummy->Next;
   }
 }
