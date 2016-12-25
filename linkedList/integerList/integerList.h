@@ -50,3 +50,7 @@ integerList add(integerList A, integerList B);
 /* Mutiply two non-negative integers
  */
 integerList multiply(integerList A, integerList B);
+
+/* Power
+ */
+integerList powIntegerList(integerList A, int power);

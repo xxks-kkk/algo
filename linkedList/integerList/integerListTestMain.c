@@ -34,5 +34,17 @@ int main()
 
   printf("TEST: multiply\n");
   printIntegerList(multiply(int0, int1));
+  printf("\n");
+
+  printf("TEST: power\n");
+  int digits5[] = {1};
+  integerList int5 = initializeInteger(digits5, 1);
+  printIntegerList(int5);
+  //printIntegerList(multiply(int5, int5));
+  
+  printf("\n");
+  //printIntegerList(powIntegerList(int5, 2));
+  printf("\n");
+  
   return 0;
 }

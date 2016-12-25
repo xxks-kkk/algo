@@ -178,7 +178,8 @@ multiply(integerList A, integerList B)
     for(i = 0; i < indent; i++)
     {
       addDigit(0,tmpR);
-    }    
+    }
+    
     R = add(R, tmpR);
     indent ++;
     carry = 0;
@@ -190,3 +191,25 @@ multiply(integerList A, integerList B)
   
   return R;
  }
+
+integerList powIntegerList(integerList A, int power)
+{
+  if (power == 0)
+  {
+    integerList R = malloc(sizeof(struct Node));
+    addDigit(1, R);
+    return R;
+  }
+  if (power == 1)
+  {
+    return A;
+  }
+  if (power % 2 == 0)
+  {
+    return powIntegerList(multiply(A, A), power/2);
+  }
+  else
+  {
+    return multiply(powIntegerList(multiply(A, A), power/2), A);
+  }
+}
