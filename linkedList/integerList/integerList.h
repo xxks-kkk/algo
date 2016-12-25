@@ -30,10 +30,18 @@ struct Node
  */
 integerList initializeInteger(int digits[], int numDigits);
 
+/* Make empty integer list
+ */
+integerList makeEmpty();
+
 /* Delete the whole integerList and 
  * we keep the header node.
  */
 void deleteIntegerList(integerList L);
+
+/* Delete the whole integerList plus the header node
+ */
+void deleteAll(integerList L);
 
 /* Add the digit immediately after the PtrToNode
  */
@@ -54,3 +62,7 @@ integerList multiply(integerList A, integerList B);
 /* Power
  */
 integerList powIntegerList(integerList A, int power);
+
+/* Compute the distribution of the digits 0 to 9 in 2^4000.
+ */
+void count(integerList A);
