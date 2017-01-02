@@ -95,7 +95,9 @@ circularDoubleLinkedListJosephus(ET N, ET M)
   // initialize the arr
   int i;
   int* people;
+
   people = calloc(N, sizeof(int));
+  //people = malloc(N*sizeof(int)); // can use either 'malloc' or 'calloc' in this case
 
   for ( i = 0; i < N; i++)
   {
