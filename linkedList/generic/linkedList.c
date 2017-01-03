@@ -39,10 +39,30 @@ deleteList(List L)
   }
 }
 
-ET getElement(Pos loc)
+ET
+getElement(Pos loc)
 {
   return loc->Element;
 }
+
+void
+deleteNode(ET elem, List L)
+{
+  Pos dummyL = L->Next;
+  Pos dummyPrev = L;
+
+  for(; dummyL != NULL; dummyPrev = dummyL, dummyL = dummyL->Next)
+  {
+    if (dummyL->Element == elem)
+    {
+      Pos tmp = dummyL;
+      dummyPrev->Next = dummyL->Next;
+      free(tmp);
+      return;
+    }
+  }
+}
+
 
 /**---- VARIOUS LIST PROBLEMS ----**/
 
@@ -480,4 +500,83 @@ reverseListRecursive(List L)
 {
   reverseListRecursiveHelper(L->Next);
   L->Next = P;
+}
+
+List radixSort(int studentRecords[], int N)
+{
+  List res = malloc(sizeof(Node));
+  int numBuckets = 1000;
+  int numPass = 3;
+
+  Pos Buckets[] = malloc(numBucket * sizeof(Node));
+
+  int k;
+  for (k = 0; k < numBuckets; k++)
+  {
+    Buckets[k]->Next = NULL;
+  }
+
+  int i, j, start, end, prevTmp, currTmp;
+  Pos dummyL;
+  for (i = 0; i < numPass; i++)
+  {
+    if (i == 0)
+    {
+      start = 6;
+      end = 8;
+    }
+    if (i == 1)
+    {
+      prevStart = 6;
+      prevEnd = 8;
+      start = 3;
+      end = 5;
+    }
+    if (i == 2)
+    {
+      prevStart = 3;
+      prevEnd = 5;
+      start = 0;
+      end = 2;
+    }
+    for (j = 0; j <  N; j++)
+    {
+      if (i != 0)
+      {
+        prevTmp = chunk_number(studentRecords[j], prevStart, prevEnd);
+      }
+      currTmp = chunk_number(studentRecords[j], start, end);
+      dummyL = Buckets[currTmp]->Next;
+      while(dummyL != NULL)
+      {
+        dummyL = dummyL->Next;
+      }
+      if (prevTmp != currTmp && i != 0)
+      {
+        deleteNode(prevTmp, Buckets[prevTmp]);
+        insert(studentRecords[j], Buckets[currTmp], dummyL);
+      }
+      if (i == 0)
+      {
+        insert(studentRecords[j], Buckets[currTmp], dummyL);
+      }
+    }
+
+  }
+
+  dummyR = res;
+  for (k = 0; k < numBuckets; k++)
+  {
+    dummyL = Buckets[k]->Next;
+    while(dummyL != NULL)
+    {
+      insert(dummyL->Element, res, dummyR);
+      dummyL = dummyL->Next;
+      dummyR = dummyR->Next;
+    }
+    deleteList(Buckets[k]);
+    free(Buckets[k]);
+  }
+  
+  return res;
 }

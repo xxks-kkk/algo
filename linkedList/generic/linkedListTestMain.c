@@ -2,9 +2,11 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include "utility.h"
 
 void test_find();
+void test_radixSort();
+void construct_ssn(N);
 
 int main()
 {
@@ -77,11 +79,13 @@ int main()
   printf("\n");
 
   test_find();
+  test_radixSort();
   
   return 0;
 }
 
-void test_find()
+void
+test_find()
 {
   printf("TEST: find\n");
   Pos loc;
@@ -93,3 +97,35 @@ void test_find()
   assert(getElement(loc) == 3);
   printf("Pass all");
 }
+
+void
+test_radixSort()
+{
+  printf("TEST: radixSort\n");
+  N = 10;
+  int* ssn = construct_ssn(N);
+  printArray(ssn);
+  List res = radixSort(ssn, N);
+  printList(res);
+}
+
+
+/* Construct an array of social security number
+ * to be used for radix sort test
+ */
+int* construct_ssn(N)
+{
+  // number of social security number digits
+  int numDigit = 9; 
+
+  int *res = calloc(N, sizeof(int));
+
+  int i;
+  for (i = 0; i < N; i++)
+  {
+    res[i] = random_at_most(999999999);
+  }
+  
+  return res;
+}
+
