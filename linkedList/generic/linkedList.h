@@ -25,6 +25,9 @@ void insert(ET elem, List L, Pos position);
  */
 void deleteList(List L);
 
+/* Give the element of the specified node 
+ */
+ET getElement(Pos loc);
 
 
 /**---- VARIOUS LIST PROBLEMS ----**/
@@ -65,7 +68,13 @@ List intersectionSortedLists(List L, List P);
  * using only the basic list operations.
  */
 List unionSortedLists(List L, List P);
-   
+
+/* 3.11 write a program to find a particular element in a singly linked list. "find" is nonrecursive.
+ * "findRecursive" is recursive.
+ */
+Pos find(ET target, List L);
+Pos findRecursive(ET target, List L);
+
 /* 3.12.a write a nonrecursive procedure to reverse a singly linked list in O(N) time.
  */
 List reverseList(List L);
@@ -75,3 +84,5 @@ List reverseList(List L);
  */
 void reverseListIterative(List L);
 void reverseListRecursive(List L);
+
+

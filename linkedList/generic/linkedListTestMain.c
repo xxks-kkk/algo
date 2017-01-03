@@ -1,6 +1,10 @@
+#include "linkedList.h"
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "linkedList.h"
+#include <math.h>
+
+void test_find();
 
 int main()
 {
@@ -71,6 +75,21 @@ int main()
   reverseListRecursive(Q33);
   printList(Q33);
   printf("\n");
+
+  test_find();
   
   return 0;
+}
+
+void test_find()
+{
+  printf("TEST: find\n");
+  Pos loc;
+  ET test_Q1[] = {1,2,3};
+  List Q1 = initializeList(test_Q1, 3);
+  loc = find(3, Q1);
+  assert(getElement(loc) == 3);
+  loc = findRecursive(3,Q1);
+  assert(getElement(loc) == 3);
+  printf("Pass all");
 }

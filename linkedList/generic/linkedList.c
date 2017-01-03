@@ -39,6 +39,10 @@ deleteList(List L)
   }
 }
 
+ET getElement(Pos loc)
+{
+  return loc->Element;
+}
 
 /**---- VARIOUS LIST PROBLEMS ----**/
 
@@ -344,6 +348,41 @@ unionSortedLists(List L, List P)
   }
 
   return R;
+}
+
+Pos
+find(ET target, List L)
+{
+  Pos dummyL = L->Next;
+  while (dummyL != NULL)
+  {
+    if (dummyL->Element == target)
+    {
+      return dummyL;
+    }
+    dummyL = dummyL->Next;
+  }
+  return NULL;
+}
+
+static Pos
+findRecursiveHelper(ET target, List L)
+{
+  if (L->Element == target)
+  {
+    return L;
+  }
+  if (L == NULL)
+  {
+    return NULL;
+  }
+  return findRecursiveHelper(target, L->Next);
+}
+
+Pos
+findRecursive(ET target, List L)
+{
+  return findRecursiveHelper(target, L->Next); 
 }
 
 /* The idea for this routine is quite simple:
