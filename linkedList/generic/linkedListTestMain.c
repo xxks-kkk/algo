@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include "utility.h"
 
+void test_printList();
+void test_printListReverse();
+void test_printLots();
 void test_find();
 void test_deleteNode();
 void test_radixSort();
@@ -17,21 +20,10 @@ int main()
   printf("// LINKED LIST TEST\n");
   printf("///////////////////////\n\n");
   
-  List L, P, Q, Q1, Q2, R; 
+  List L, Q, Q1, Q2, R; 
   ET test_L[] = {23, 44, 45, 57, 89, -1};
   L = initializeList(test_L, 6);
 
-  printf("TEST: printList\n");
-  printList(L);
-  printf ("\n");
-  printListReverse(L);
-  printf ("\n");
-
-  printf("TEST: printLots\n");
-  ET test_P[] = {1,3,8,5,7,6};
-  P = initializeList(test_P, 6);
-  printLots(L, P);
-  printf("\n");
 
   printf("TEST: swap\n");
   swap(L, 44);
@@ -80,11 +72,68 @@ int main()
   printList(Q33);
   printf("\n");
 
+  test_printList();
+  printf("\n");
+
+  test_printListReverse();
+  printf("\n");
+
+  test_printLots();
+  printf("\n");
+
   test_find();
+  printf("\n");
+
   test_deleteNode();
+  printf("\n");
+
+  test_deleteNode();
+  printf("\n");
+
   test_radixSort();
   
   return 0;
+}
+
+void
+
+test_printList()
+{
+  printf("TEST: printList\n");
+  ET test_L[] = {23, 44, 45, 57, 89, -1};
+  List L = initializeList(test_L, 6);
+  printList(L);
+  printf("\n");
+  deleteAll(L);
+}
+
+void
+test_printListReverse()
+{
+  printf("TEST: printListReverse\n");
+  ET test_L[] = {23, 44, 45, 57, 89, -1};
+  List L = initializeList(test_L, 6);
+  printf("Original:\n");
+  printList(L);
+  printf("\n");
+  printf("Reverse:\n");
+  printListReverse(L);
+  printf ("\n");
+  deleteAll(L);
+}
+
+void
+test_printLots()
+{
+  printf("TEST: printLots\n");
+  ET test_P[] = {1,3,8,5,7,6};
+  List P = initializeList(test_P, 6);
+  ET test_L[] = {23, 44, 45, 57, 89, -1};
+  List L = initializeList(test_L, 6);
+  printLots(L, P);
+  printf("\n");
+  deleteAll(P);
+  deleteAll(L);
 }
 
 void
@@ -99,6 +148,7 @@ test_find()
   loc = findRecursive(3,Q1);
   assert(getElement(loc) == 3);
   printf("Pass all\n");
+  deleteAll(Q1);
 }
 
 void
@@ -114,6 +164,7 @@ test_deleteNode()
   printf("After deletion: ");
   printList(Q1);
   printf("\n");
+  deleteAll(Q1);
 }
 
 void
@@ -127,6 +178,7 @@ test_radixSort()
   int* res = radixSort(ssn, N);
   printf("After sort:\n");
   printArray(res, N);
+  free(ssn);
 }
 
 

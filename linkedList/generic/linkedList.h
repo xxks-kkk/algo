@@ -36,6 +36,10 @@ List makeEmpty();
  */
 void deleteList(List L);
 
+/* delete all: the list and the header node
+ */
+void deleteAll(List L);
+
 /* Give the element of the specified node 
  */
 ET getElement(Pos loc);

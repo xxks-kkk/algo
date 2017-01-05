@@ -48,6 +48,13 @@ deleteList(List L)
   }
 }
 
+void
+deleteAll(List L)
+{
+  deleteList(L);
+  free(L);
+}
+
 ET
 getElement(Pos loc)
 {
