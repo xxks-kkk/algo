@@ -7,6 +7,7 @@
 void test_printList();
 void test_printListReverse();
 void test_printLots();
+void test_swap();
 void test_find();
 void test_deleteNode();
 void test_radixSort();
@@ -22,23 +23,6 @@ int main()
   List L, Q, Q1, Q2, R; 
   ET test_L[] = {23, 44, 45, 57, 89, -1};
   L = initializeList(test_L, 6);
-
-
-  printf("TEST: swap\n");
-  swap(L, 44);
-  printList(L);
-  printf("\n");
-  swap(L, -1);
-  printList(L);
-  printf("\n");
-  swap(L, 45);
-  printList(L);
-  printf("\n");
-  ET test_Q[] = {1,3,2,3,4};
-  Q = initializeList(test_Q, 5);
-  swap(Q, 3);
-  printList(Q);
-  printf("\n");
 
   printf("TEST: intersectionSortedLists\n");
   ET test_Q1[] = {1,2,3,3};
@@ -78,6 +62,9 @@ int main()
   printf("\n");
 
   test_printLots();
+  printf("\n");
+
+  test_swap();
   printf("\n");
 
   test_find();
@@ -129,6 +116,30 @@ test_printLots()
   printf("\n");
   deleteAll(P);
   deleteAll(L);
+}
+
+void
+test_swap()
+{
+  ET test_L[] = {23, 44, 45, 57, 89, -1};
+  List L = initializeList(test_L, 6);
+  printf("TEST: swap\n");
+  swap(L, 44);
+  printList(L);
+  printf("\n");
+  swap(L, -1);
+  printList(L);
+  printf("\n");
+  swap(L, 45);
+  printList(L);
+  printf("\n");
+  ET test_Q[] = {1,3,2,3,4};
+  List Q = initializeList(test_Q, 5);
+  swap(Q, 3);
+  printList(Q);
+  printf("\n");
+  deleteAll(L);
+  deleteAll(Q);
 }
 
 void
