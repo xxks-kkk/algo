@@ -5,8 +5,10 @@
 #include "utility.h"
 
 void test_find();
+void test_deleteNode();
 void test_radixSort();
-void construct_ssn(N);
+int* construct_ssn(int N);
+
 
 int main()
 {
@@ -79,6 +81,7 @@ int main()
   printf("\n");
 
   test_find();
+  test_deleteNode();
   test_radixSort();
   
   return 0;
@@ -95,30 +98,44 @@ test_find()
   assert(getElement(loc) == 3);
   loc = findRecursive(3,Q1);
   assert(getElement(loc) == 3);
-  printf("Pass all");
+  printf("Pass all\n");
+}
+
+void
+test_deleteNode()
+{
+  printf("TEST: deleteNode\n");
+  ET test_Q1[] = {1,2,3};
+  List Q1 = initializeList(test_Q1, 3);
+  printf("Original list: ");
+  printList(Q1);
+  printf("\n");
+  deleteNode(2, Q1);
+  printf("After deletion: ");
+  printList(Q1);
+  printf("\n");
 }
 
 void
 test_radixSort()
 {
   printf("TEST: radixSort\n");
-  N = 10;
+  int N = 10;
   int* ssn = construct_ssn(N);
-  printArray(ssn);
-  List res = radixSort(ssn, N);
-  printList(res);
+  printf("Original:\n");
+  printArray(ssn,N);
+  int* res = radixSort(ssn, N);
+  printf("After sort:\n");
+  printArray(res, N);
 }
 
 
 /* Construct an array of social security number
  * to be used for radix sort test
  */
-int* construct_ssn(N)
+int* construct_ssn(int N)
 {
-  // number of social security number digits
-  int numDigit = 9; 
-
-  int *res = calloc(N, sizeof(int));
+  int* res = calloc(N, sizeof(int));
 
   int i;
   for (i = 0; i < N; i++)

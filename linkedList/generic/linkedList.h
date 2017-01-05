@@ -27,6 +27,10 @@ typedef PtrToNode Pos;
  */
 void insert(ET elem, List L, Pos position);
 
+/* Make empty linked list
+ */
+List makeEmpty();
+
 /* We don't delete the header node. 
  * In other words, the empty list contains a header node.
  */
@@ -100,4 +104,4 @@ void reverseListRecursive(List L);
 /* 3.13 You have to sort an array of student records by social security number. Write a program
  * to do this, using radix sort with 1000 buckets and three passes.
  */
-List radixSort(int studentRecords[], int N);
+int* radixSort(int studentRecords[], int N);
