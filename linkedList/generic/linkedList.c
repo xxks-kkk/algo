@@ -1,6 +1,7 @@
 #include "linkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "utility.h"
 
 struct Node
 {
@@ -504,20 +505,71 @@ reverseListRecursive(List L)
 
 List radixSort(int studentRecords[], int N)
 {
-  List res = malloc(sizeof(Node));
+  List res = malloc(sizeof(struct Node));
   int numBuckets = 1000;
   int numPass = 3;
 
-  Pos Buckets[] = malloc(numBucket * sizeof(Node));
+  Pos Buckets = malloc(numBuckets * sizeof(struct Node));
 
   int k;
   for (k = 0; k < numBuckets; k++)
   {
-    Buckets[k]->Next = NULL;
+    Buckets[k].Next = NULL;
   }
 
-  int i, j, start, end, prevTmp, currTmp;
-  Pos dummyL;
+  Pos dummyL, dummyR, dummyP;
+  int i, j, start, end, prevStart, prevEnd, prevTmp, currTmp;
+
+  // first pass
+  start = 6;
+  end = 8;
+  for (j = 0; j < N; j++)
+  {
+    currTmp = chunk_number(studentRecords[j], start, end);
+    dummyL = &Buckets[currTmp];
+    while(dummyL->Next != NULL)
+    {
+      dummyL = dummyL->Next;
+    }
+    insert(studentRecords[j], &Buckets[currTmp], dummyL);
+  }
+
+  // the rest passes
+  for (i = 0; i < numPass - 1; i++)
+  {
+    if (i == 1)
+    {
+      start = 3;
+      end = 5;
+    }
+    if (i == 2)
+    {
+      start = 0;
+      end = 2;
+    }
+    for (j = 0; j < numBuckets; j++)
+    {
+      dummyL = &Buckets[j]->Next;
+      dummyLPrev = &Buckets[j];
+      while (dummyL != NULL)
+      {
+        currTmp = chunk_number(dummyL->Element, start, end);
+        dummyP = &Buckets[currTmp]->Next;
+        while (dummyP != NULL)
+        {
+          dummyP = dummyP->Next;
+        }
+        insert(dummyL->Element, &Buckets[currTmp], dummyP);
+        //deleteNode(dummyL->Element, &Buckets[j]);
+        Pos tmp = dummyL;
+        dummyLPrev->Next = dummyL->Next;
+        free(tmp);
+        dummyLPrev = dummyL;
+        dummyL = dummyL->Next;
+      }
+    }
+    
+  /* The following logic needs to rewrite */
   for (i = 0; i < numPass; i++)
   {
     if (i == 0)
@@ -546,36 +598,37 @@ List radixSort(int studentRecords[], int N)
         prevTmp = chunk_number(studentRecords[j], prevStart, prevEnd);
       }
       currTmp = chunk_number(studentRecords[j], start, end);
-      dummyL = Buckets[currTmp]->Next;
-      while(dummyL != NULL)
+      dummyL = &Buckets[currTmp];
+      while(dummyL->Next != NULL)
       {
         dummyL = dummyL->Next;
       }
       if (prevTmp != currTmp && i != 0)
       {
-        deleteNode(prevTmp, Buckets[prevTmp]);
-        insert(studentRecords[j], Buckets[currTmp], dummyL);
+        deleteNode(studentRecords[j], &Buckets[prevTmp]);
+        insert(studentRecords[j], &Buckets[currTmp], dummyL);
       }
       if (i == 0)
       {
-        insert(studentRecords[j], Buckets[currTmp], dummyL);
+        insert(studentRecords[j], &Buckets[currTmp], dummyL);
       }
     }
 
   }
 
+  /* TODO: there is a bug inside the following logic */
   dummyR = res;
   for (k = 0; k < numBuckets; k++)
   {
-    dummyL = Buckets[k]->Next;
+    dummyL = Buckets[k].Next;
     while(dummyL != NULL)
     {
       insert(dummyL->Element, res, dummyR);
       dummyL = dummyL->Next;
       dummyR = dummyR->Next;
     }
-    deleteList(Buckets[k]);
-    free(Buckets[k]);
+    deleteList(&Buckets[k]);
+    free(&Buckets[k]);
   }
   
   return res;
