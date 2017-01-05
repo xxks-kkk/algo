@@ -15,7 +15,6 @@ int* construct_ssn(int N);
 
 int main()
 {
-
   printf("///////////////////////\n");
   printf("// LINKED LIST TEST\n");
   printf("///////////////////////\n\n");
@@ -87,16 +86,12 @@ int main()
   test_deleteNode();
   printf("\n");
 
-  test_deleteNode();
-  printf("\n");
-
   test_radixSort();
   
   return 0;
 }
 
 void
-
 test_printList()
 {
   printf("TEST: printList\n");
