@@ -7,6 +7,9 @@
 void test_printList();
 void test_printListReverse();
 void test_printLots();
+void test_intersectionSortedLists();
+void test_unionSortedLists();
+void test_reverseList();
 void test_swap();
 void test_find();
 void test_deleteNode();
@@ -20,58 +23,23 @@ int main()
   printf("// LINKED LIST TEST\n");
   printf("///////////////////////\n\n");
   
-  List L, Q, Q1, Q2, R; 
-  ET test_L[] = {23, 44, 45, 57, 89, -1};
-  L = initializeList(test_L, 6);
+  test_intersectionSortedLists(); printf("\n");
 
-  printf("TEST: intersectionSortedLists\n");
-  ET test_Q1[] = {1,2,3,3};
-  ET test_Q2[] = {1,3,3};
-  Q1 = initializeList(test_Q1, 4);
-  Q2 = initializeList(test_Q2, 3);
-  R = intersectionSortedLists(Q1, Q2);
-  printList(R);
-  printf("\n");
-
-  printf("TEST: unionSortedLists\n");
-  ET test_Q31[] = {1,3,3};
-  ET test_Q32[] = {2,3,4,5};
-  List Q31 = initializeList(test_Q31, 3);
-  List Q32 = initializeList(test_Q32, 4);
-  R = unionSortedLists(Q31, Q32);
-  printList(R);
-  printf("\n");
+  test_unionSortedLists();        printf("\n");
   
-  printf("TEST: reverseList\n");
-  ET test_Q33[] = {1,2,3};
-  List Q33 = initializeList(test_Q33, 3);
-  Q33 = reverseList(Q33);
-  printList(Q33);
-  printf("\n");
-  reverseListIterative(Q33);
-  printList(Q33);
-  printf("\n");
-  reverseListRecursive(Q33);
-  printList(Q33);
-  printf("\n");
+  test_printList();               printf("\n");
 
-  test_printList();
-  printf("\n");
+  test_printListReverse();        printf("\n");
 
-  test_printListReverse();
-  printf("\n");
+  test_printLots();               printf("\n");
 
-  test_printLots();
-  printf("\n");
+  test_reverseList();             printf("\n");
 
-  test_swap();
-  printf("\n");
+  test_swap();                    printf("\n");
 
-  test_find();
-  printf("\n");
+  test_find();                    printf("\n");
 
-  test_deleteNode();
-  printf("\n");
+  test_deleteNode();              printf("\n");
 
   test_radixSort();
   
@@ -85,7 +53,6 @@ test_printList()
   ET test_L[] = {23, 44, 45, 57, 89, -1};
   List L = initializeList(test_L, 6);
   printList(L);
-  printf("\n");
   deleteAll(L);
 }
 
@@ -97,11 +64,10 @@ test_printListReverse()
   List L = initializeList(test_L, 6);
   printf("Original:\n");
   printList(L);
-  printf("\n");
   printf("Reverse:\n");
   printListReverse(L);
-  printf ("\n");
   deleteAll(L);
+  printf("\n");
 }
 
 void
@@ -119,6 +85,60 @@ test_printLots()
 }
 
 void
+test_intersectionSortedLists()
+{
+  printf("TEST: intersectionSortedLists\n");
+  ET test_Q1[] = {1,2,3,3};
+  ET test_Q2[] = {1,3,3};
+  printf("List 1 to intersect:");
+  List Q1 = initializeList(test_Q1, 4);
+  printList(Q1);
+  List Q2 = initializeList(test_Q2, 3);
+  printf("List 2 to intersect:");
+  printList(Q2);
+  printf("Intersection result:");
+  List R = intersectionSortedLists(Q1, Q2);
+  printList(R);
+}
+
+void
+test_unionSortedLists()
+{
+  printf("TEST: unionSortedLists\n");
+  ET test_Q31[] = {1,3,3};
+  ET test_Q32[] = {2,3,4,5};
+  List Q31 = initializeList(test_Q31, 3);
+  printf("List 1 to union:");
+  printList(Q31);
+  List Q32 = initializeList(test_Q32, 4);
+  printf("List 2 to union:");
+  printList(Q32);
+  printf("Union result:");
+  List R = unionSortedLists(Q31, Q32);
+  printList(R);
+}
+
+
+void
+test_reverseList()
+{
+  printf("TEST: reverseList\n");
+  ET test_Q33[] = {1,2,3};
+  List Q33 = initializeList(test_Q33, 3);
+  printf("Original:\n");
+  printList(Q33);
+  printf("1st Reverse:\n");
+  Q33 = reverseList(Q33);
+  printList(Q33);
+  printf("2nd Reverse:\n");
+  reverseListIterative(Q33);
+  printList(Q33);
+  printf("3rd Reverse:\n");
+  reverseListRecursive(Q33);
+  printList(Q33);
+}
+
+void
 test_swap()
 {
   ET test_L[] = {23, 44, 45, 57, 89, -1};
@@ -126,18 +146,14 @@ test_swap()
   printf("TEST: swap\n");
   swap(L, 44);
   printList(L);
-  printf("\n");
   swap(L, -1);
   printList(L);
-  printf("\n");
   swap(L, 45);
   printList(L);
-  printf("\n");
   ET test_Q[] = {1,3,2,3,4};
   List Q = initializeList(test_Q, 5);
   swap(Q, 3);
   printList(Q);
-  printf("\n");
   deleteAll(L);
   deleteAll(Q);
 }
@@ -165,11 +181,9 @@ test_deleteNode()
   List Q1 = initializeList(test_Q1, 3);
   printf("Original list: ");
   printList(Q1);
-  printf("\n");
   deleteNode(2, Q1);
   printf("After deletion: ");
   printList(Q1);
-  printf("\n");
   deleteAll(Q1);
 }
 

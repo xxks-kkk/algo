@@ -128,6 +128,7 @@ printList(List L)
     printf("%d%s", dummy->Element, (dummy->Next) ? ("->") : (""));
     dummy = dummy->Next;
   }
+  printf("\n");
 }
 
 static void
@@ -322,7 +323,7 @@ unionSortedLists(List L, List P)
 {
   Pos dummyL = L->Next;
   Pos dummyP = P->Next;
-  List R = malloc(sizeof(struct Node));
+  List R = makeEmpty();
   Pos dummyR = R;
   ET bookkeeping[100] = {0}; // prevent the duplicates
   
@@ -430,7 +431,7 @@ List
 reverseList(List L)
 {
   Pos dummyL = L->Next;
-  List R = malloc(sizeof(struct Node));
+  List R = makeEmpty();
   
   while (dummyL != NULL)
   {
