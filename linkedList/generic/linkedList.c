@@ -530,163 +530,69 @@ makeEmptyArrayOfNodes(numBuckets)
 int*
 radixSort(int studentRecords[], int N)
 {
-  List res = makeEmpty();
   int* tmpArray = calloc(N, sizeof(int));
   int numBuckets = 1000;
   int numPass = 3;
 
-  Pos dummyL, dummyR, dummyP,  dummyLPrev;
-  struct Node nodeP;
-  int i, j, start, end, currTmp, processed = 0, k;
-  struct Node nodeL;
-  Pos Buckets;
+  Pos dummyL, Buckets;
+  int i, j, start, end, currTmp, k;
   
-  Buckets = makeEmptyArrayOfNodes(numBuckets);
-  
-  // first pass
-  k = 0;
-  start = 6;
-  end = 8;
-  for (j = 0; j < N; j++)
+  for(i = 0; i < numPass; i++)
   {
-    currTmp = chunk_number(studentRecords[j], start, end);
-    dummyL = &Buckets[currTmp];
-    while(dummyL->Next != NULL)
+    if (i == 1 || i == 2)
     {
-      dummyL = dummyL->Next;
+      free(Buckets);
     }
-    insert(studentRecords[j], &Buckets[currTmp], dummyL);
-  }
-  
-  for (j = 0; j < numBuckets; j++)
-  {
-    dummyL = (&Buckets[j])->Next;
-    while(dummyL != NULL)
-    {
-      tmpArray[k] = dummyL->Element;
-      dummyL = dummyL->Next;
-      k++;
+    Buckets = makeEmptyArrayOfNodes(numBuckets);
+    if (i == 0)
+    {           
+      // first pass
+      k = 0;
+      start = 6;
+      end = 8;
+      tmpArray = studentRecords;
     }
-  }
-  //printArray(tmpArray, N);
-  
-  // second pass
-  free(Buckets);
-  Buckets = makeEmptyArrayOfNodes(numBuckets);
-
-  k = 0;
-  start = 3;
-  end = 5;
-  for (j = 0; j < N; j++)
-  {
-    currTmp = chunk_number(tmpArray[j], start, end);
-    dummyL = &Buckets[currTmp];
-    while(dummyL->Next != NULL)
+    if (i == 1)
     {
-      dummyL = dummyL->Next;
+      // second pass
+      k = 0;
+      start = 3;
+      end = 5;
     }
-    insert(tmpArray[j], &Buckets[currTmp], dummyL);
-  }
-  free(tmpArray);
-  tmpArray = calloc(N, sizeof(int));
-  for (j = 0; j < numBuckets; j++)
-  {
-    dummyL = (&Buckets[j])->Next;
-    while(dummyL != NULL)
+    if (i == 2)
     {
-      tmpArray[k] = dummyL->Element;
-      dummyL = dummyL->Next;
-      k++;
+      // third pass
+      k = 0;
+      start = 0;
+      end = 2;
     }
-  }
-  //printArray(tmpArray, N);
-  
-  // third pass
-  free(Buckets);
-  Buckets = makeEmptyArrayOfNodes(numBuckets);
-
-  k = 0;
-  start = 0;
-  end = 2;
-  for (j = 0; j < N; j++)
-  {
-    currTmp = chunk_number(tmpArray[j], start, end);
-    dummyL = &Buckets[currTmp];
-    while(dummyL->Next != NULL)
+    for (j = 0; j < N; j++)
     {
-      dummyL = dummyL->Next;
+      currTmp = chunk_number(tmpArray[j], start, end);
+      dummyL = &Buckets[currTmp];
+      while(dummyL->Next != NULL)
+      {
+        dummyL = dummyL->Next;
+      }
+      insert(tmpArray[j], &Buckets[currTmp], dummyL);
     }
-    insert(tmpArray[j], &Buckets[currTmp], dummyL);
-  }
-  free(tmpArray);
-  tmpArray = calloc(N, sizeof(int));
-  for (j = 0; j < numBuckets; j++)
-  {
-    dummyL = (&Buckets[j])->Next;
-    while(dummyL != NULL)
+    if (i ==  1 || i == 2)
     {
-      tmpArray[k] = dummyL->Element;
-      dummyL = dummyL->Next;
-      k++;
+      free(tmpArray);
+      tmpArray = calloc(N, sizeof(int));
+    }
+    for (j = 0; j < numBuckets; j++)
+    {
+      dummyL = (&Buckets[j])->Next;
+      while(dummyL != NULL)
+      {
+        tmpArray[k] = dummyL->Element;
+        dummyL = dummyL->Next;
+        k++;
+      }
     }
   }
   
-  // the rest passes
-  /* for (i = 0; i < numPass - 1; i++) */
-  /* { */
-  /*   if (i == 0) */
-  /*   { */
-  /*     start = 3; */
-  /*     end = 5; */
-  /*   } */
-  /*   if (i == 1) */
-  /*   { */
-  /*     start = 0; */
-  /*     end = 2; */
-  /*   } */
-  /*   for (j = 0; j < numBuckets; j++) */
-  /*   { */
-  /*     dummyL = (&Buckets[j])->Next; */
-  /*     //dummyL = Buckets[j].Next; */
-  /*     //dummyLPrev = &Buckets[j]; */
-  /*     while (dummyL != NULL) */
-  /*     { */
-  /*       currTmp = chunk_number(dummyL->Element, start, end); */
-  /*       dummyP  = &Buckets[currTmp]; */
-  /*       while (dummyP->Next != NULL) */
-  /*       { */
-  /*         dummyP = dummyP->Next; */
-  /*       } */
-  /*       insert(dummyL->Element, &Buckets[currTmp], dummyP); */
-  /*       deleteNode(dummyL->Element, &Buckets[j]); */
-  /*       //Pos tmp = dummyL; */
-  /*       //dummyLPrev->Next = dummyL->Next; */
-  /*       //free(tmp); */
-  /*       //dummyLPrev = dummyL; */
-  /*       dummyL = dummyL->Next; */
-  /*       processed ++; */
-  /*     } */
-  /*     if (processed == N) */
-  /*     { */
-  /*       break; */
-  /*     } */
-  /*   } */
-  /* } */
-  
-  /* dummyR = res; */
-  /* for (k = 0; k < numBuckets; k++) */
-  /* { */
-  /*   dummyL = (&Buckets[k])->Next; */
-  /*   while(dummyL != NULL) */
-  /*   { */
-  /*     insert(dummyL->Element, res, dummyR); */
-  /*     dummyL = dummyL->Next; */
-  /*     dummyR = dummyR->Next; */
-  /*   } */
-  /*   deleteList(&Buckets[k]); */
-  /*   //free(&Buckets[k]); */
-  /* } */
-
   free(Buckets);
   return tmpArray;
 }
