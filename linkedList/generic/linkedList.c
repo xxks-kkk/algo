@@ -1,6 +1,7 @@
 #include "linkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "utility.h"
 
 struct Node
 {
@@ -24,6 +25,14 @@ insert(ET elem, List L, Pos position)
   position->Next = tmpNode;
 }
 
+List
+makeEmpty()
+{
+  List L = malloc(sizeof(struct Node));
+  L->Next = NULL;
+  return L;
+}
+
 void
 deleteList(List L)
 {
@@ -39,10 +48,30 @@ deleteList(List L)
   }
 }
 
-ET getElement(Pos loc)
+ET
+getElement(Pos loc)
 {
   return loc->Element;
 }
+
+void
+deleteNode(ET elem, List L)
+{
+  Pos dummyL = L->Next;
+  Pos dummyPrev = L;
+
+  for(; dummyL != NULL; dummyPrev = dummyL, dummyL = dummyL->Next)
+  {
+    if (dummyL->Element == elem)
+    {
+      Pos tmp = dummyL;
+      dummyPrev->Next = dummyL->Next;
+      free(tmp);
+      return;
+    }
+  }
+}
+
 
 /**---- VARIOUS LIST PROBLEMS ----**/
 
@@ -480,4 +509,97 @@ reverseListRecursive(List L)
 {
   reverseListRecursiveHelper(L->Next);
   L->Next = P;
+}
+
+/* Returns an array of header nodes 
+ */
+static List
+makeEmptyArrayOfNodes(numBuckets)
+{
+  Pos Buckets = malloc(numBuckets * sizeof(struct Node));
+
+  int k;
+  for (k = 0; k < numBuckets; k++)
+  {
+    Buckets[k].Next = NULL;
+  }
+
+  return Buckets;
+}
+
+/* TODO: there is a defect for chunk_number.
+ * we probably can take in studentRecords as an array of
+ * 9 digit number in string so that '002' can perserve as
+ * '002' instead of '2' as int. 
+ * In other words, this function will break if we feed in number
+ * that is not 9 digit
+ */
+int*
+radixSort(int studentRecords[], int N)
+{
+  int* tmpArray = calloc(N, sizeof(int));
+  int numBuckets = 1000;
+  int numPass = 3;
+
+  Pos dummyL, Buckets;
+  int i, j, start, end, currTmp, k;
+  
+  for(i = 0; i < numPass; i++)
+  {
+    if (i == 1 || i == 2)
+    {
+      free(Buckets);
+    }
+    Buckets = makeEmptyArrayOfNodes(numBuckets);
+    if (i == 0)
+    {           
+      // first pass
+      k = 0;
+      start = 6;
+      end = 8;
+      tmpArray = studentRecords;
+    }
+    if (i == 1)
+    {
+      // second pass
+      k = 0;
+      start = 3;
+      end = 5;
+    }
+    if (i == 2)
+    {
+      // third pass
+      k = 0;
+      start = 0;
+      end = 2;
+    }
+    for (j = 0; j < N; j++)
+    {
+      currTmp = chunk_number(tmpArray[j], start, end);
+      dummyL = &Buckets[currTmp];
+      while(dummyL->Next != NULL)
+      {
+        dummyL = dummyL->Next;
+      }
+      insert(tmpArray[j], &Buckets[currTmp], dummyL);
+    }
+    if (i ==  1 || i == 2)
+    {
+      free(tmpArray);
+      tmpArray = calloc(N, sizeof(int));
+    }
+    for (j = 0; j < numBuckets; j++)
+    {
+      dummyL = (&Buckets[j])->Next;
+      while(dummyL != NULL)
+      {
+        tmpArray[k] = dummyL->Element;
+        dummyL = dummyL->Next;
+        k++;
+      }
+    }
+  }
+  
+  free(Buckets);
+  return tmpArray;
 }

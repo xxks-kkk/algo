@@ -2,9 +2,13 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include "utility.h"
 
 void test_find();
+void test_deleteNode();
+void test_radixSort();
+int* construct_ssn(int N);
+
 
 int main()
 {
@@ -77,11 +81,14 @@ int main()
   printf("\n");
 
   test_find();
+  test_deleteNode();
+  test_radixSort();
   
   return 0;
 }
 
-void test_find()
+void
+test_find()
 {
   printf("TEST: find\n");
   Pos loc;
@@ -91,5 +98,55 @@ void test_find()
   assert(getElement(loc) == 3);
   loc = findRecursive(3,Q1);
   assert(getElement(loc) == 3);
-  printf("Pass all");
+  printf("Pass all\n");
 }
+
+void
+test_deleteNode()
+{
+  printf("TEST: deleteNode\n");
+  ET test_Q1[] = {1,2,3};
+  List Q1 = initializeList(test_Q1, 3);
+  printf("Original list: ");
+  printList(Q1);
+  printf("\n");
+  deleteNode(2, Q1);
+  printf("After deletion: ");
+  printList(Q1);
+  printf("\n");
+}
+
+void
+test_radixSort()
+{
+  printf("TEST: radixSort\n");
+  int N = 100;
+  int* ssn = construct_ssn(N);
+  printf("Original:\n");
+  printArray(ssn,N);
+  int* res = radixSort(ssn, N);
+  printf("After sort:\n");
+  printArray(res, N);
+}
+
+
+/* Construct an array of social security number
+ * to be used for radix sort test
+ */
+int* construct_ssn(int N)
+{
+  int* res = calloc(N, sizeof(int));
+
+  int i;
+  for (i = 0; i < N; i++)
+  {
+    res[i] = random_at_most(999999999);
+    while(countDigits(res[i]) != 9)
+    {
+      res[i] = random_at_most(999999999);
+    }
+  }
+  
+  return res;
+}
+

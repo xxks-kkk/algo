@@ -1,9 +1,14 @@
-typedef int ET; // ET shorts for "ElementType" 
+/* ET shorts for "ElementType" 
+ */
+typedef int ET; 
 
-/** BASIC LIST DEFINITION **/
+////////////////////////////
+// BASIC LIST DEFINITION 
+////////////////////////////
 
-// we always assume there is a dummy node at the very beginning
-// of the list.
+/* we always assume there is a dummy node at the very beginning
+ * of the list.
+ */
 #ifndef _LINKED_LIST_H
 #define _LINKED_LIST_H
 
@@ -14,11 +19,17 @@ typedef PtrToNode Pos;
 
 #endif
 
-/**---- BASIC LIST OPERATION ----**/
+//////////////////////////
+// BASIC LIST OPERATION 
+//////////////////////////
 
 /* Insert (after legal position P)
  */
 void insert(ET elem, List L, Pos position);
+
+/* Make empty linked list
+ */
+List makeEmpty();
 
 /* We don't delete the header node. 
  * In other words, the empty list contains a header node.
@@ -29,8 +40,13 @@ void deleteList(List L);
  */
 ET getElement(Pos loc);
 
+/* Find the node contains "elem" in the given list and delete it.
+ */
+void deleteNode(ET elem, List L);
 
-/**---- VARIOUS LIST PROBLEMS ----**/
+///////////////////////////
+// VARIOUS LIST PROBLEMS 
+///////////////////////////
 
 /* initialize a singly linked list from a given array
  */
@@ -85,4 +101,7 @@ List reverseList(List L);
 void reverseListIterative(List L);
 void reverseListRecursive(List L);
 
-
+/* 3.13 You have to sort an array of student records by social security number. Write a program
+ * to do this, using radix sort with 1000 buckets and three passes.
+ */
+int* radixSort(int studentRecords[], int N);
