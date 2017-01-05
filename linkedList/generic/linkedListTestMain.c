@@ -87,12 +87,16 @@ int main()
   test_deleteNode();
   printf("\n");
 
+  test_deleteNode();
+  printf("\n");
+
   test_radixSort();
   
   return 0;
 }
 
 void
+
 test_printList()
 {
   printf("TEST: printList\n");
