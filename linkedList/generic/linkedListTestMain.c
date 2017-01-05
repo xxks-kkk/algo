@@ -120,7 +120,7 @@ void
 test_radixSort()
 {
   printf("TEST: radixSort\n");
-  int N = 10;
+  int N = 100;
   int* ssn = construct_ssn(N);
   printf("Original:\n");
   printArray(ssn,N);
@@ -141,6 +141,10 @@ int* construct_ssn(int N)
   for (i = 0; i < N; i++)
   {
     res[i] = random_at_most(999999999);
+    while(countDigits(res[i]) != 9)
+    {
+      res[i] = random_at_most(999999999);
+    }
   }
   
   return res;

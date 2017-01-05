@@ -8,7 +8,13 @@
  */
 long random_at_most(long max);
 
+/* print array
+ */
 void printArray(int array[], int length);
+
+/* count number of digits for a number 
+ */
+int countDigits(int number);
 
 /* chunk a number based upon the "start" position and "end" position and return the number in between (inclusive)
  * Start position begins from "0" from the most significant bit.

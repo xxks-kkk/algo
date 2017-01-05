@@ -42,6 +42,17 @@ test_chunk_number()
   printf("[2:5] digits: %d\n", res);
   res = chunk_number(a, 0, 5);
   assert(res == 123456);
-  printf("[0:5] digits: %d\n", res);  
+  printf("[0:5] digits: %d\n", res);
+  /* printf("-------------------\n\n"); */
+  /* int k = 0; */
+  /* for(k = 0; k < 100; k++) */
+  /* { */
+  /*   int num = random_at_most(999999999); */
+  /*   printf("orginal number: %d\n", num); */
+  /*   printf("[0:2] digits: %d\n", chunk_number(num, 0, 2)); */
+  /*   printf("[3:5] digits: %d\n", chunk_number(num, 3, 5)); */
+  /*   printf("[6:8] digits: %d\n", chunk_number(num, 6, 8)); */
+  /*   printf("\n"); */
+  /* } */
 }
 
