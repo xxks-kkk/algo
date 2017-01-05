@@ -527,16 +527,11 @@ makeEmptyArrayOfNodes(numBuckets)
   return Buckets;
 }
 
-/* TODO: there is a defect for chunk_number.
- * we probably can take in studentRecords as an array of
- * 9 digit number in string so that '002' can perserve as
- * '002' instead of '2' as int. 
- * In other words, this function will break if we feed in number
- * that is not 9 digit
- */
 int*
 radixSort(int studentRecords[], int N)
 {
+  // NOTE: "start" and "end" value are chosen
+  // based upon the fact of SSN is 9-digit number
   int* tmpArray = calloc(N, sizeof(int));
   int numBuckets = 1000;
   int numPass = 3;
