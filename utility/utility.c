@@ -44,17 +44,8 @@ int countDigits(int number)
   return numDigits;
 }
 
-/* TODO; has defect when the number of digits is less than 9,
- * there is floating point exception.
- * Example:
- * orginal number: 17502605
- * [0:2] digits: 175
- * [3:5] digits: 26
- * make: *** [test] Floating point exception
- */
 int chunk_number(int number, int start, int end)
 {
-  // we count the number of digit of the number has
   int numDigits = countDigits(number);
   
   if (start == 0)
