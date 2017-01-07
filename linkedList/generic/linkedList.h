@@ -48,6 +48,17 @@ ET getElement(Pos loc);
  */
 void deleteNode(ET elem, List L);
 
+/* 3.15.b self-adjusting lists insert. All the insertions
+ * are performed at the front of the list.
+ */
+void selfAdjustInsert(ET elem, List L);
+
+/* 3.15.b self-adjusting lists find. When an element is accessed by a Find,
+ * it is moved to the front of the list without changing the relative order of the
+ * other items. Return the pointer to the element.
+ */
+Pos selfAdjustFind(ET elem, List L);
+
 ///////////////////////////
 // VARIOUS LIST PROBLEMS 
 ///////////////////////////

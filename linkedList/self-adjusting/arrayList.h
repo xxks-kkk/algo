@@ -22,8 +22,7 @@ void printArrayList(int* A, int length);
  */
 void arrayInsert(int  elem, int** list, int length);
 
-/* fina an element elem, and return
- * the position of the first appearance of 
- * the target.
+/* find the first appreance of the elem and return 0 if find. 
+ * -1 if not found.
  */
-int arrayFind(int elem, int* list);
+int arrayFind(int elem, int* list, int length);

@@ -15,7 +15,8 @@ void test_find();
 void test_deleteNode();
 void test_radixSort();
 int* construct_ssn(int N);
-
+void test_selfAdjustInsert();
+void test_selfAdjustFind();
 
 int main()
 {
@@ -41,7 +42,11 @@ int main()
 
   test_deleteNode();              printf("\n");
 
-  test_radixSort();
+  test_radixSort();               printf("\n");
+
+  test_selfAdjustInsert();        printf("\n");
+
+  test_selfAdjustFind();          printf("\n");
   
   return 0;
 }
@@ -222,3 +227,30 @@ int* construct_ssn(int N)
   return res;
 }
 
+void
+test_selfAdjustInsert()
+{
+  printf("TEST: selfAdjustInsert\n");
+  ET test_L[] = {23, 44, 45, 57, 89, -1};
+  List L = initializeList(test_L, 6);
+  printf("Before self-adjust insert:");
+  printList(L);
+  selfAdjustInsert(10, L);
+  printf("After self-adjust insert:");
+  printList(L);
+  deleteAll(L);
+}
+
+void
+test_selfAdjustFind()
+{
+  printf("TEST: selfAdjustFind\n");
+  ET test_L[] = {23, 44, 45, 57, 89, -1};
+  List L = initializeList(test_L, 6);
+  printf("Before self-adjust find:");
+  printList(L);
+  selfAdjustFind(45, L);
+  printf("After self-adjust find:");
+  printList(L);
+  deleteAll(L);
+}

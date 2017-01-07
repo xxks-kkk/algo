@@ -79,6 +79,34 @@ deleteNode(ET elem, List L)
   }
 }
 
+void
+selfAdjustInsert(ET elem, List L)
+{
+  insert(elem, L, L);
+}
+
+Pos
+selfAdjustFind(ET elem, List L)
+{
+  Pos
+    dummyL = L->Next,
+    dummyLPrev = L;
+  while(dummyL != NULL)
+  {
+    if (dummyL->Element == elem)
+    {
+      selfAdjustInsert(elem, L);
+      Pos tmp = dummyL;
+      dummyLPrev->Next = dummyL->Next;
+      free(tmp);
+      tmp = NULL;
+      return L->Next;
+    }
+    dummyLPrev = dummyL;
+    dummyL = dummyL->Next;
+  }
+  return NULL;
+}
 
 /**---- VARIOUS LIST PROBLEMS ----**/
 
