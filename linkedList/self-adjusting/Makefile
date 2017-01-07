@@ -9,7 +9,8 @@ SRC_FILES=\
   $(ROOT)utility/utility.c
 
 INC_DIRS=\
-  -I$(ROOT)utility/
+  -I$(ROOT)utility                \
+  -I$(ROOT)linkedList/generic     \
 
 LIBS=\
   -lm

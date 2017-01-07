@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /* 3.15.a Write an array implementation
  * of self-adjusting lists. A self-adjusting
@@ -9,16 +10,20 @@
  * changing the relative order of the other items.
  */
 
-/* Make an empty list with length N
+/* Stack array translates to the heap array
  */
-int* makeEmptyList(int N);
+int* arrayTranslate(int B[], int length);
 
-/* insert an element elem
+/* Print the list 
  */
-void insert(int elem, int list[]);
+void printArrayList(int* A, int length);
+
+/* insert an element elem at front
+ */
+void arrayInsert(int  elem, int** list, int length);
 
 /* fina an element elem, and return
  * the position of the first appearance of 
  * the target.
  */
-int find(int elem, int list[]);
+int arrayFind(int elem, int* list);

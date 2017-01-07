@@ -1,27 +1,42 @@
 #include "arrayList.h"
 
 int*
-makeEmptyList(int N)
+arrayTranslate(int B[], int length)
 {
-  return calloc(N, sizeof(int));
+  int* res = calloc(length, sizeof(int));
+  int i;
+  for (i = 0; i < length; i++)
+  {
+    *(res+i) = B[i];
+  }
+  return res;
 }
 
-void insert(int elem, int list[]);
+void
+printArrayList(int* A, int length)
 {
-  if (list[0] == 0)
+  int i;
+  for (i = 0; i < length; i++)
   {
-    list[0] = elem;
-    return;
+    printf("%d, ", A[i]);
   }
-  else
-  {
-    
-
-  }
+  printf("\n");
 }
 
-int find(int elem, int list[]);
+void
+arrayInsert(int elem, int** list, int length)
 {
+  *list = realloc(*list, sizeof(int) * (length+1));
+  int i;
+  for (i = 0; i < length; i++)
+  {
+    (*list)[length - i] = (*list)[length-i-1];
+  }
+  *((*list)) = elem;
+}
 
-
+int
+arrayFind(int elem, int list[])
+{
+  return 0;
 }
