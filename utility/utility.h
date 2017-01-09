@@ -2,6 +2,8 @@
 #include "stdlib.h"
 #include "math.h"
 
+typedef enum { false, true } bool;
+
 /* Assumes 0 <= max <= RAND_MAX
  * Returns in the closed interval [0, max]
  * from: http://stackoverflow.com/questions/2509679/how-to-generate-a-random-number-from-within-a-range
