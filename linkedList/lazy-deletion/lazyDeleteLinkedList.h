@@ -2,6 +2,21 @@
  */
 typedef int ET; 
 
+/* 3.17 An alternative to the deletion strategy
+ * we have given is to use lazy deletion. To delete
+ * an element, we merely mark it deleted (using an extra bit field).
+ * The number of deleted and nondeleted elements in the list
+ * is kept as part of the data structure. If there are as many
+ * deleted element as nondeleted elements, we traverse the entire list,
+ * performing the standard deletion algorithm on all marked nodes.
+ * 
+ * ADVANTAGE    : It takes less time to mark a node as deleted than to change pointers. In addition, it is simpler to code,
+ *                and there is a possible savings if deleted keys are subsequently reinserted (in the same place).
+ * DISADVANTAGE : Once a node has been "lazily deleted" it still needs to be traversed in a search for another node.
+ *                Also, you then use up a lump amount of time to delete all the "lazily deleted elements". Use more space,
+ *                because each cell needs an extra bit (which is typically a byte), and unused cells are not freed.
+ */
+
 ////////////////////////////
 // BASIC LIST DEFINITION 
 ////////////////////////////
