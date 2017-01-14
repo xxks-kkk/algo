@@ -4,15 +4,15 @@
 
 typedef enum { false, true } bool;
 
+/////////////////////////////////
+// MATHEMATICS RELATED
+////////////////////////////////
+
 /* Assumes 0 <= max <= RAND_MAX
  * Returns in the closed interval [0, max]
  * from: http://stackoverflow.com/questions/2509679/how-to-generate-a-random-number-from-within-a-range
  */
 long random_at_most(long max);
-
-/* print array
- */
-void printArray(int array[], int length);
 
 /* count number of digits for a number 
  */
@@ -26,3 +26,20 @@ int countDigits(int number);
  *              start = 6, end = 8, will give 789 in return.
  */
 int chunk_number(int number, int start, int end);
+
+
+/////////////////////////////////
+// ARRAY RELATED
+////////////////////////////////
+
+/* print array
+ */
+void printArray(int array[], int length);
+
+////////////////////////////////
+// I/O RELATED
+////////////////////////////////
+
+/* get the file extension for the given filename
+ */
+char *get_filename_ext(char *filename);

@@ -1,4 +1,5 @@
 #include "utility.h"
+#include <string.h>
 
 long
 random_at_most(long max)
@@ -21,16 +22,6 @@ random_at_most(long max)
 
   // Truncated division is intentional
   return x/bin_size;
-}
-
-void
-printArray(int array[], int length)
-{
-  int i;
-  for (i = 0; i < length; i++)
-  {
-    printf("%d, %s", array[i], (i == length-1) ? ("\n") : (""));
-  }
 }
 
 int countDigits(int number)
@@ -59,4 +50,25 @@ int chunk_number(int number, int start, int end)
     int newPower = newLength - start;
     return a - a / (int)pow(10, newPower) * (int)pow(10, newPower) ;
   }
+}
+
+void
+printArray(int array[], int length)
+{
+  int i;
+  for (i = 0; i < length; i++)
+  {
+    printf("%d, %s", array[i], (i == length-1) ? ("\n") : (""));
+  }
+}
+
+char*
+get_filename_ext(char *filename)
+{
+  char *dot = strrchr(filename, '.'); // `strrchr` function searches for the last occurrence of a character in a string
+  if (!dot || dot == filename)
+  {
+    return "";
+  }
+  return dot+1;
 }
