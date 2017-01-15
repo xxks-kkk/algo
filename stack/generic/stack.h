@@ -1,10 +1,11 @@
-/* ET shorts for "ElementType" 
- */
-typedef int ET; 
-
 /* We use array implementation of stacks
  */
 #ifndef _STACK_H
+#define _STACK_H
+
+/* ET shorts for "ElementType" 
+ */
+typedef int ET; 
 
 struct StackRecord;
 typedef struct StackRecord* Stack;
@@ -44,10 +45,6 @@ void pop(Stack S);
 /* Check the top element and pop it out of stack
  */
 ET topAndPop(Stack S);
-
-/* increase the size of stack
- */
-void resizeStack(Stack S);
 
 #endif
 

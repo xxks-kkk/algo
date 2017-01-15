@@ -1,8 +1,10 @@
+#include "postfix.h"
 #include "stack.h"
+#include "utility.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "utility.h"
+#include <unistd.h> // use 'getopt'
 
 void test_initalizeStack();
 void test_createStack();
@@ -11,20 +13,46 @@ void test_top();
 void test_pop();
 void test_topAndPop();
 
-int main()
+int main(int argc, char** argv)
 {
-  printf("///////////////////////\n");
-  printf("// STACK TEST\n");
-  printf("///////////////////////\n\n");
+  extern char *optarg;
+  int c, err = 0;
+  char *filename;
+  static char usage[] = "usage: %s [-b filename] [-s]\n";
 
-  test_initalizeStack(); printf("\n");
-  test_createStack();    printf("\n");
-  test_push();           printf("\n");
-  test_top();            printf("\n");
-  test_pop();            printf("\n");
-  test_topAndPop();      printf("\n");
-
-  return 0;
+  while ((c = getopt(argc, argv, "b:s")) != -1)
+  {
+    switch(c)
+    {
+      case 'b':
+        filename = optarg;
+        printf("Postfix expression: ");
+        printPostfix(filename);
+        int res = evaluate_postfix(filename);
+        printf("res: %d\n", res);
+        break;
+      case 's':
+        printf("///////////////////////\n");
+        printf("// STACK TEST\n");
+        printf("///////////////////////\n\n");
+        test_initalizeStack(); printf("\n");
+        test_createStack();    printf("\n");
+        test_push();           printf("\n");
+        test_top();            printf("\n");
+        test_pop();            printf("\n");
+        test_topAndPop();      printf("\n");        
+        break;
+      case '?':
+        err = 1;
+        break;
+    }
+  }
+  if (err)
+  {
+    fprintf(stderr, usage, argv[0]);
+    exit(1);
+  }
+  exit(0);  
 }
 
 void

@@ -6,6 +6,8 @@
 #define EmptyToS (-1)
 #define MinStackSize (5)
 
+static void resizeStack(Stack);
+
 struct StackRecord
 {
   int Capacity;
@@ -135,7 +137,7 @@ resizeStackArray(ET** array, int length)
   *array = realloc(*array, sizeof(ET) * length);
 }
 
-void
+static void
 resizeStack(Stack S)
 {
   S->Capacity *= 2;

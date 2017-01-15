@@ -21,7 +21,6 @@ OUTPUT_FILE=main
 
 test:
 	$(C_COMPILER) $(CFLAGS) $(INC_DIRS) $(LIBS) $(SRC_FILES) -o $(OUTPUT_FILE)
-	./$(OUTPUT_FILE) -v
 
 clean:
 	rm -rf $(OUTPUT_FILE)
