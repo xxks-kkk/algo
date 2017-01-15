@@ -1,7 +1,8 @@
-#include "stack.h"
+#include "stack3.h"
 #include "utility.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define EmptyToS (-1)
 #define MinStackSize (5)
@@ -69,7 +70,9 @@ push (ET elem, Stack S)
   {
     resizeStack(S);
   }
-  S->Array[++S->TopOfStack] = elem;
+  char* dupSymbol = malloc(strlen(elem) * sizeof(char));
+  strcpy(dupSymbol, elem);
+  S->Array[++S->TopOfStack] = dupSymbol;
 }
 
 /* Check the top element of the Stack
@@ -77,7 +80,11 @@ push (ET elem, Stack S)
 ET
 top(Stack S)
 {
-  return S->Array[S->TopOfStack];
+  if (!isEmpty(S))
+  {
+    return S->Array[S->TopOfStack];
+  }
+  return "";
 }
   
 /* Pop the top element out of the Stack
@@ -96,38 +103,6 @@ topAndPop(Stack S)
   return S->Array[S->TopOfStack--];
 }
 
-/* initialize the Stack from the given array
- * with the array[0] being the bottom of the Stack
- */
-Stack initializeStack(int array[], int length)
-{
-  Stack s = malloc(sizeof(struct StackRecord));
-  s->Capacity = length;
-  s->Array = calloc(length, sizeof(int));
-  int i;
-  for ( i = 0; i < length; i++)
-  {
-    s->Array[i] = array[i];
-  }
-  s->TopOfStack = s->Capacity - 1;
-  return s;
-}
-
-void
-printStack(Stack S)
-{
-  ET* arrayS = S->Array;
-  int i;
-  for (i = 0; i <= S->TopOfStack; i++)
-  {
-    printf("%s%d%s",
-           "|",
-           arrayS[i],
-           (i == S->TopOfStack) ? ("| <-top") : (""));
-  }
-  printf("\n");
-}
-
 static void
 resizeStackArray(ET** array, int length)
 {
@@ -139,4 +114,25 @@ resizeStack(Stack S)
 {
   S->Capacity *= 2;
   resizeStackArray(&(S->Array), S->Capacity);
+}
+
+void
+printStack(Stack S)
+{
+  ET* arrayS = S->Array;
+  int i;
+  for (i = 0; i <= S->TopOfStack; i++)
+  {
+    printf("%s%s%s",
+           "|",
+           arrayS[i],
+           (i == S->TopOfStack) ? ("| <-top") : (""));
+  }
+  printf("\n");
+}
+
+int
+getTopOfStack(Stack S)
+{
+  return S->TopOfStack;
 }

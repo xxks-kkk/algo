@@ -9,8 +9,3 @@
  * a postfix expression.
  */
 ET evaluate_postfix(char*);
-
-/*
- * Print out the postfix expression reading from file 
- */
-void printPostfix(char*);

@@ -29,12 +29,17 @@ int chunk_number(int number, int start, int end);
 
 
 /////////////////////////////////
-// ARRAY RELATED
+// MISC RELATED
 ////////////////////////////////
 
 /* print array
  */
 void printArray(int array[], int length);
+
+/*
+ * Print out the content reading from file 
+ */
+void printFile(char*);
 
 ////////////////////////////////
 // I/O RELATED

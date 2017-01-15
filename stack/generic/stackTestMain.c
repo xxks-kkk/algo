@@ -27,7 +27,7 @@ int main(int argc, char** argv)
       case 'b':
         filename = optarg;
         printf("Postfix expression: ");
-        printPostfix(filename);
+        printFile(filename);
         int res = evaluate_postfix(filename);
         printf("res: %d\n", res);
         break;

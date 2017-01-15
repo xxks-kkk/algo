@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "stack3.h"
 #include "utility.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -94,38 +94,6 @@ ET
 topAndPop(Stack S)
 {
   return S->Array[S->TopOfStack--];
-}
-
-/* initialize the Stack from the given array
- * with the array[0] being the bottom of the Stack
- */
-Stack initializeStack(int array[], int length)
-{
-  Stack s = malloc(sizeof(struct StackRecord));
-  s->Capacity = length;
-  s->Array = calloc(length, sizeof(int));
-  int i;
-  for ( i = 0; i < length; i++)
-  {
-    s->Array[i] = array[i];
-  }
-  s->TopOfStack = s->Capacity - 1;
-  return s;
-}
-
-void
-printStack(Stack S)
-{
-  ET* arrayS = S->Array;
-  int i;
-  for (i = 0; i <= S->TopOfStack; i++)
-  {
-    printf("%s%d%s",
-           "|",
-           arrayS[i],
-           (i == S->TopOfStack) ? ("| <-top") : (""));
-  }
-  printf("\n");
 }
 
 static void

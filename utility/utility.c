@@ -62,6 +62,25 @@ printArray(int array[], int length)
   }
 }
 
+void
+printFile(char* filename)
+{
+  FILE *fp;
+  fp = fopen(filename, "r");
+  if (fp == NULL)
+  {
+    fprintf(stderr, "can't open %s\n", filename);
+    exit(1);
+  }
+  int c;
+  while((c=getc(fp)) != EOF)
+  {
+    putchar(c);
+  }
+  printf("\n");
+  fclose(fp);
+}
+
 char*
 get_filename_ext(char *filename)
 {

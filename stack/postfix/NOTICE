@@ -1,0 +1,17 @@
+This directory exists for legacy:
+
+The implementation for "void infixTopostfix(char*);"
+is same as that in "postfix-c" directory. The only difference
+is that, the version in this directory has "ET" as:
+
+  typedef char ET;
+
+However, inside "postfix-c" directory, "ET" is defined as:
+
+  typedef char* ET;
+
+The version in this directory is simpler than the version in "postfix-c".
+I implement "postfix-c" version is for engineering purpose: put both
+"void infixTopostfix(char*);" and "void postfixToinfix(char* filename);"
+under the same data structure framework to make the overall repo structure
+not very chaotic.
