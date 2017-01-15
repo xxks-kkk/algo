@@ -1,0 +1,7 @@
+Implementation for <Data Structures and Algorithm Analysis in C (2nd Edition)> by Mark Allen Weiss
+
+Solution coverage:
+
+Chapter 3
+
+3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7.a;b;d, 3.8, 3.9, 3.10, 3.11, 3.12, 3.13, 3.15, 3.17, 3.18.b;c
