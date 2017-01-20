@@ -41,6 +41,10 @@ void printArray(int array[], int length);
  */
 void printFile(char*);
 
+/* A function for fatal errors
+ */
+void fatal(char *);
+
 ////////////////////////////////
 // I/O RELATED
 ////////////////////////////////
