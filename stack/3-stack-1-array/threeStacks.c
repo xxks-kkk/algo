@@ -114,6 +114,8 @@ relocateMiddleStack(ThreeStacks s)
     int numShifts = newCenterOfMiddleStack - centerOfMiddleStack;
     /* printf("numShifts: %d\n", numShifts); */
 
+    // We save the elements of middle stack in an array in order to prevent element
+    // overriding when we shift elements of middle stack left/right.
     int i;
     ET *arrayTmp = calloc(numElementsMiddleStack, sizeof(ET));
     for (i = 0; i < numElementsMiddleStack; i++)
