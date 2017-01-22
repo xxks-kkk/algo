@@ -2,7 +2,10 @@
 #include "stdlib.h"
 #include "math.h"
 
+#ifndef BOOLEAN
+#define BOOLEAN
 typedef enum { false, true } bool;
+#endif
 
 /////////////////////////////////
 // MATHEMATICS RELATED
