@@ -6,3 +6,4 @@
 .#*
 main
 *.out
+*.dot
