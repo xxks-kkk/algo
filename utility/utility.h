@@ -30,6 +30,10 @@ int countDigits(int number);
  */
 int chunk_number(int number, int start, int end);
 
+/*
+ * return the bigger value of two input
+ */
+int max(int a, int b);
 
 /////////////////////////////////
 // MISC RELATED

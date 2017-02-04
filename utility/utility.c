@@ -53,6 +53,14 @@ int chunk_number(int number, int start, int end)
   }
 }
 
+int
+max(int a, int b)
+{
+  if (a > b)
+    return a;
+  return b;
+}
+  
 void
 printArray(int array[], int length)
 {
