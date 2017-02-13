@@ -246,6 +246,8 @@ BSTfindMin(Splay T)
   return T;
 }
 
+// We do normal deletion as BST, then we
+// splay the parent node of the deletion point to the root
 Splay
 delete2(ET elem, Splay T)
 {
