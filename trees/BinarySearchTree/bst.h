@@ -33,4 +33,15 @@ BST initializeBST(ET*, int);
  */
 void bst_print_dot(BST, FILE*);
 
+/*
+ * MAW 4.28 Write efficient functions that take only a pointer to the root of a binary tree T,
+ * and compute:
+ * a. The number of nodes in T.
+ * b. The number of leaves in T.
+ * c. The number of full nodes in T.
+ */
+int numNodes(BST);
+int numLeaves(BST);
+int numFullNodes(BST);
+
 #endif

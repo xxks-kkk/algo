@@ -10,6 +10,9 @@ void test_findMin();
 void test_findMax();
 void test_insert();
 void test_delete();
+void test_numNodes();
+void test_numLeaves();
+void test_numFullNodes();
 
 int
 main()
@@ -21,9 +24,12 @@ main()
   test_initializeBST();
   test_find();              printf("\n");
   test_findMin();           printf("\n");
-  test_findMax();          printf("\n");
+  test_findMax();           printf("\n");
   test_insert();
-  test_delete();  
+  test_delete();
+  test_numNodes();          printf("\n");
+  test_numLeaves();         printf("\n");
+  test_numFullNodes();      printf("\n");
   return 0;
 }
 
@@ -110,3 +116,36 @@ test_delete()
   generate_dot(T);
   delete_tree(T);  
 }
+
+void
+test_numNodes()
+{
+  printf("TEST: numNodes\n");
+  ET test_array[] = {3,1,4,6,9,2,5,7};
+  BST T = initializeBST(test_array, 8);
+  printf("num of nodes in the tree: %d\n", numNodes(T));
+  delete_tree(T);
+}
+
+void
+test_numLeaves()
+{
+  printf("TEST: numLeaves\n");
+  ET test_array[] = {3,1,4,6,9,2,5,7};
+  BST T = initializeBST(test_array, 8);
+  generate_dot(T);
+  printf("num of leaves in the tree: %d\n", numLeaves(T));
+  delete_tree(T);
+}
+
+void
+test_numFullNodes()
+{
+  printf("TEST: numFullNodes\n");
+  ET test_array[] = {3,1,4,6,9,2,5,7};
+  BST T = initializeBST(test_array, 8);
+  generate_dot(T);
+  printf("num of full nodes in the tree: %d\n", numFullNodes(T));
+  delete_tree(T);
+}
+  

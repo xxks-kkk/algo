@@ -146,3 +146,54 @@ bst_print_dot(BST T, FILE* stream)
   bst_print_dot_aux(T, stream);
   fprintf(stream,"}\n");
 }
+
+int
+numNodes(BST T)
+{
+  int count = 0;
+  if (T == NULL)
+    return 0;
+  else
+  {
+    count += numNodes(T->Left);
+    count += numNodes(T->Right);
+    count += 1;
+  }
+  return count;
+}
+
+int
+numLeaves(BST T)
+{
+  int count = 0;
+  if (T == NULL)
+    return 0;
+  else if (T->Left == NULL && T->Right == NULL)
+    count ++;
+  else
+  {
+    count += numLeaves(T->Left);
+    count += numLeaves(T->Right);
+  }
+  return count;
+}
+
+int
+numFullNodes(BST T)
+{
+  int count = 0;
+  if (T == NULL)
+    return 0;
+  if (T->Left != NULL && T->Right != NULL)
+  {
+    count ++;
+    count += numFullNodes(T->Right);
+    count += numFullNodes(T->Left);
+  }
+  else if (T->Left == NULL)
+    count += numFullNodes(T->Right);
+  else if (T->Right == NULL)
+    count += numFullNodes(T->Left);
+  return count;
+}
+    
