@@ -90,17 +90,17 @@ splaying(ET elem, Splay T)
       return T;
     if (elem < T->Left->Element) // Zig-Zig case (left)
     {
-      T->Left->Left = splaying(elem, T->Left->Left); // recursively bring the key as root of left-left
+      T->Left->Left = find(elem, T->Left->Left); // recursively bring the key as root of left-left
       T = zigzigLeft(T);
     }
     else if (elem > T->Left->Element) // Zig-Zag case (left)
     {
-      T->Left->Right = splaying(elem, T->Left->Right);
+      T->Left->Right = find(elem, T->Left->Right);
       T = zigzagLeft(T);
     }
     else // Zig case (left)
     {
-      T->Left = splaying(elem, T->Left);
+      T->Left = find(elem, T->Left);
       T = zigLeft(T);
     }
     return T;
@@ -111,17 +111,17 @@ splaying(ET elem, Splay T)
       return T;
     if (elem > T->Right->Element) // Zig-Zig case (right)
     {
-      T->Right->Right = splaying(elem, T->Right->Right);
+      T->Right->Right = find(elem, T->Right->Right);
       T = zigzigRight(T);
     }
     else if (elem < T->Right->Element) // Zig-Zag case (right)
     {
-      T->Right->Left = splaying(elem, T->Right->Left);
+      T->Right->Left = find(elem, T->Right->Left);
       T = zigzagRight(T);
     }
     else // Zig case (right)
     {
-      T->Right = splaying(elem, T->Right);
+      T->Right = find(elem, T->Right);
       T = zigRight(T);
     }
     return T;
@@ -137,21 +137,25 @@ find(ET elem, Splay T)
 Position
 findMin(Splay T)
 {
-  Position root = T;
-  if (T != NULL)
-    while (T->Left != NULL)
-      T = T->Left;
-  return splaying(T->Element, root);
+  if (T == NULL)
+    return NULL;
+  else if (T->Left == NULL)
+  {
+    T = find(T->Element, T);
+    return T;
+  }
+  else
+    return findMin(T->Left);
 }
 
 Position
 findMax(Splay T)
 {
-  Position root = T;
   if (T != NULL)
     while (T->Right != NULL)
       T = T->Right;
-  return splaying(T->Element, root);
+  T = splaying(T->Element, T);
+  return T;
 }
 
 static Position
@@ -230,6 +234,50 @@ delete(ET elem, Splay T)
   free(T);
   T = findMax(LeftSubTree);
   T->Right = RightSubTree;
+  return T;
+}
+
+static Position
+BSTfindMin(Splay T)
+{
+  if (T != NULL)
+    while(T->Left != NULL)
+      T = T->Left;
+  return T;
+}
+
+Splay
+delete2(ET elem, Splay T)
+{
+  Position tmp;
+  
+  if (T == NULL)
+    fatal("No such element in splay tree");
+  if (elem < T->Element)
+  {
+    T->Left = delete2(elem, T->Left);
+    T = zigLeft(T);
+  }
+  else if (elem > T->Element)
+  {
+    T->Right = delete2(elem, T->Right);
+    T = zigRight(T);
+  }
+  else if (T->Left != NULL && T->Right != NULL)
+  {
+      tmp = BSTfindMin(T->Right);
+      T->Element = tmp->Element;
+      T->Right = delete2(T->Element, T->Right);
+  }
+  else
+  {
+    tmp = T;
+    if (T->Left == NULL)
+      T = T->Right;
+    else if (T->Right == NULL)
+      T = T->Left;
+    free(tmp);
+  }
   return T;
 }
 

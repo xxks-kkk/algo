@@ -10,6 +10,7 @@ void test_insertion2();
 void test_findMin();
 void test_findMax();
 void test_delete();
+void test_delete2();
 
 int
 main()
@@ -23,7 +24,8 @@ main()
   test_insertion2();        printf("==================\n");  
   test_findMin();           printf("==================\n");  
   test_findMax();           printf("==================\n");  
-  test_delete();            printf("==================\n");  
+  test_delete();            printf("==================\n");
+  test_delete2();           printf("==================\n");
   return 0;
 }
 
@@ -161,6 +163,21 @@ test_delete()
   generate_dot(T);
   printf("deleting the root: %d\n", 8);
   T = delete(8, T);
+  printf("Number of rotations: %d\n", getNumRotations());  
+  generate_dot(T);
+  delete_tree(T);
+}
+
+void
+test_delete2()
+{
+  printf("TEST: delete2\n");
+  ET test_array[] = {10,5,15,2,8,13,20,6,9};
+  Splay T = initializeBST(test_array, 9);
+  printf("Number of rotations: %d\n", getNumRotations());  
+  generate_dot(T);
+  printf("deleting the root: %d\n", 8);
+  T = delete2(8, T);
   printf("Number of rotations: %d\n", getNumRotations());  
   generate_dot(T);
   delete_tree(T);
