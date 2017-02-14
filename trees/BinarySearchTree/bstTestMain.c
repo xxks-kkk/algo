@@ -15,6 +15,7 @@ void test_numLeaves();
 void test_numFullNodes();
 void test_randBST();
 void test_perfectBST();
+void test_printRangeKeys();
 
 int
 main()
@@ -34,6 +35,8 @@ main()
   test_numFullNodes();      printf("\n");
   test_randBST();           printf("\n");
   test_perfectBST();        printf("\n");
+  test_printRangeKeys();    printf("\n");
+  
   return 0;
 }
 
@@ -169,4 +172,17 @@ test_perfectBST()
   BST T = perfectBST(2);
   generate_dot(T);
   delete_tree(T);
+}
+
+void
+test_printRangeKeys()
+{
+  printf("TEST: printRangeKeys\n");
+  BST T = perfectBST(2);
+  generate_dot(T);
+  int k1 = 0;
+  int k2 = 3;
+  printf("range between k1: %d and k2: %d\n", k1, k2);
+  printRangeKeys(T, k1, k2);
+  delete_tree(T);  
 }

@@ -232,3 +232,36 @@ perfectBST(int H)
   int LastNodeAssigned = 0;
   return genTrees(H, &LastNodeAssigned);
 }
+
+// This is known as one-dimensional range searching. The time is O(K) (K
+// is the number of keys printed.) to perform the inorder traversal, if
+// a significant number of nodes are found, and also proportional to the depth of the tree,
+// if we get to some leaves (for instance, if no nodes are found). Since the average depth is
+// O(log N), this gives an O(K + log N) average bound.
+void
+printRangeKeys(BST T, int k1, int k2)
+{
+  if (T != NULL)
+  {
+    /* if (T->Element >= k1 && T->Element <= k2) */
+    /* { */
+    /*   printf("%d,", T->Element); */
+    /*   printRangeKeys(T->Left, k1, k2); */
+    /*   printRangeKeys(T->Right, k1, k2); */
+    /* } */
+    /* else if (T->Element < k1) */
+    /*   printRangeKeys(T->Right, k1, k2); */
+    /* else if (T->Element > k2) */
+    /*   printRangeKeys(T->Left, k1, k2);       */
+
+    // advantage compared with the above commented one:
+    // 1. shorter lines of code
+    // 2. values are printed in sorted order
+    if (k1 <= T->Element)
+      printRangeKeys(T->Left, k1, k2);
+    if (k1 <= T->Element && T->Element <= k2)
+      printf("%d,", T->Element);
+    if (T->Element <= k2)
+      printRangeKeys(T->Right, k1, k2);
+  }
+}

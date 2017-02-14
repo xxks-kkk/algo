@@ -54,4 +54,11 @@ BST randBST(int);
  */
 BST perfectBST(int H);
 
+/*
+ * MAW 4.32 Write a function that takes as input a binary search tree, T, and two keys k_1 and k_2, which are ordered
+ * so that k_1 <= k_2, and prints all elements X in the tree such that k_1 <= Key(X) <= k_2. Do not assume any
+ * information about the type of keys except that they can be ordered (consistently). 
+ */
+void printRangeKeys(BST T, int k1, int k2);
+
 #endif
