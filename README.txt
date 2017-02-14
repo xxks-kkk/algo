@@ -9,6 +9,6 @@ Solution coverage:
 
 [Chapter 4]
 
-4.10, 4.18, 4.19, 4.20, 4.22, 4.27*, 4.28, 4.29, 4.30
+4.10, 4.18, 4.19, 4.20, 4.22, 4.27*, 4.28, 4.29, 4.30, 4.31
 
 * Implement Splay operations and numRotations counter and don't bother to run the actual experimentation

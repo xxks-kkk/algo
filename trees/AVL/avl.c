@@ -1,5 +1,5 @@
 #include "avl.h"
-
+0;136;0c
 struct AVLTreeNode
 {
   ET Element;
@@ -426,7 +426,8 @@ bst_print_dot(AVL T, FILE* stream)
 // LastNode is the address containing last value that was assigned to a node
 // This function has some nice trick:
 // - "*T" is same as "struct AVLTreeNode"
-// - we use "*LastNode" to assign value to the tree node.
+// - we use "*LastNode" to assign value to the tree nodes. In this case, we don't really care about the actual
+//   values as long as we satisfy BST property.
 static AVL
 genTree(int H, int *LastNode)
 {
@@ -445,7 +446,8 @@ genTree(int H, int *LastNode)
   else
     return NULL;
 }
- 
+
+// O(log N)
 AVL
 minAVL(int H)
 {

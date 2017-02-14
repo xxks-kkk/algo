@@ -208,3 +208,27 @@ randBST(int N)
   permutation(array, N); // O(N)
   return initializeBST(array, N);
 }
+
+// O(log N)
+// The other solution: https://cseweb.ucsd.edu/classes/su05/cse100/cse100hw1.pdf
+static BST
+genTrees(int H, int* LastNode)
+{
+  BST T = NULL;
+
+  if (H >= 0)
+  {
+    T = malloc(sizeof(*T));
+    T->Left = genTrees(H-1, LastNode);
+    T->Element = ++*LastNode;
+    T->Right = genTrees(H-1, LastNode);
+  }
+  return T;
+}
+
+BST
+perfectBST(int H)
+{
+  int LastNodeAssigned = 0;
+  return genTrees(H, &LastNodeAssigned);
+}
