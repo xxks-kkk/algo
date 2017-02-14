@@ -10,6 +10,7 @@ void test_initializeAVL();
 /* void test_findMax(); */
 void test_insert2();
 void test_delete();
+void test_minAVL();
 
 int
 main()
@@ -24,6 +25,7 @@ main()
   /* test_findMax();          printf("\n"); */
   test_insert2();
   test_delete();
+  test_minAVL();
   return 0;
 }
 
@@ -117,6 +119,15 @@ test_delete()
   AVL T = initializeAVL(test_array, 4);
   printf("deleting the root: %d\n", 7);
   T = delete(7, T);
+  generate_dot(T);
+  delete_tree(T);
+}
+
+void
+test_minAVL()
+{
+  printf("TEST: minimum AVL tree with H\n");
+  AVL T = minAVL(2);
   generate_dot(T);
   delete_tree(T);
 }

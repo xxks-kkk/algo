@@ -42,4 +42,9 @@ AVL initializeAVL(ET*, int);
  */
 void bst_print_dot(AVL, FILE*);
 
+/*
+ * MAW 4.30 Write a function to generate the AVL tree of height H with fewest nodes. 
+ */
+AVL minAVL(int H);
+
 #endif

@@ -422,3 +422,33 @@ bst_print_dot(AVL T, FILE* stream)
   bst_print_dot_aux(T, stream);
   fprintf(stream,"}\n");
 }
+
+// LastNode is the address containing last value that was assigned to a node
+// This function has some nice trick:
+// - "*T" is same as "struct AVLTreeNode"
+// - we use "*LastNode" to assign value to the tree node.
+static AVL
+genTree(int H, int *LastNode)
+{
+  AVL T;
+
+  if (H >= 0)
+  {
+    T = malloc(sizeof(*T));
+    T->Left = genTree(H-1, LastNode);
+    // *LastNode++ will first do "LastNode++" (increamenting the address) then try to access the element using *.
+    // We want to access the element first then incrementing. Remember associativity is "right to left" for ++ and *
+    T->Element = ++*LastNode; 
+    T->Right = genTree(H-2, LastNode);
+    return T;
+  }
+  else
+    return NULL;
+}
+ 
+AVL
+minAVL(int H)
+{
+  int LastNodeAssigned = 0;
+  return genTree(H, &LastNodeAssigned);
+}
