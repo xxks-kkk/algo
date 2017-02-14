@@ -13,6 +13,7 @@ void test_delete();
 void test_numNodes();
 void test_numLeaves();
 void test_numFullNodes();
+void test_randBST();
 
 int
 main()
@@ -30,6 +31,7 @@ main()
   test_numNodes();          printf("\n");
   test_numLeaves();         printf("\n");
   test_numFullNodes();      printf("\n");
+  test_randBST();           printf("\n");
   return 0;
 }
 
@@ -148,4 +150,12 @@ test_numFullNodes()
   printf("num of full nodes in the tree: %d\n", numFullNodes(T));
   delete_tree(T);
 }
-  
+
+void
+test_randBST()
+{
+  printf("TEST: randBST\n");
+  BST T = randBST(10);
+  generate_dot(T);
+  delete_tree(T);
+}

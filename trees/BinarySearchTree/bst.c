@@ -147,6 +147,7 @@ bst_print_dot(BST T, FILE* stream)
   fprintf(stream,"}\n");
 }
 
+// O(N)
 int
 numNodes(BST T)
 {
@@ -162,6 +163,7 @@ numNodes(BST T)
   return count;
 }
 
+// O(N)
 int
 numLeaves(BST T)
 {
@@ -178,6 +180,7 @@ numLeaves(BST T)
   return count;
 }
 
+// O(N)
 int
 numFullNodes(BST T)
 {
@@ -196,4 +199,12 @@ numFullNodes(BST T)
     count += numFullNodes(T->Left);
   return count;
 }
-    
+
+// O(N + NH) = O(NH), where H is the height of BST
+BST
+randBST(int N)
+{
+  int *array = malloc(N * sizeof(int));
+  permutation(array, N); // O(N)
+  return initializeBST(array, N);
+}

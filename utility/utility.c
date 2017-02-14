@@ -1,10 +1,18 @@
 #include "utility.h"
 #include <string.h>
 #include <fcntl.h>
+#include <time.h>
 
 long
 random_at_most(long max)
 {
+  time_t t;
+
+  // Intializes random number generator
+  // (we want to have different random number each time,
+  // without this code, random() will take default seed 1.)
+  srand((unsigned) time(&t));
+  
   unsigned long
     // max <= RAND_MAX < ULONG_MAX, so this is okay.
     num_bins = (unsigned long) max + 1,
@@ -60,7 +68,29 @@ max(int a, int b)
     return a;
   return b;
 }
-  
+
+// swap the values hold by a and b respectively
+// http://www.cs.utsa.edu/~wagner/CS2213/swap/swap.html
+static void
+swap(int* a, int* b)
+{
+  int tmp = *a;
+  *a = *b;
+  *b = tmp;
+}
+
+void
+permutation(int* array, int length)
+{
+  // Fill the list such that a[i] = i + 1
+  int i;
+  for (i = 0; i < length; i++)
+    array[i] = i + 1;
+  // Do the swap trick
+  for (i = 1; i < length; i++)
+    swap(&array[i], &array[random_at_most(i)]);
+}
+
 void
 printArray(int array[], int length)
 {

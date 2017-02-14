@@ -35,6 +35,13 @@ int chunk_number(int number, int start, int end);
  */
 int max(int a, int b);
 
+/*
+ * generate a permutation of the given array
+ */
+// The algorithm is from MAW 2.7, which references
+// J. Bentley, "Programming Pearls," Communications of the ACM 30 (1987), 754-757.
+void permutation(int* array, int length);
+
 /////////////////////////////////
 // MISC RELATED
 ////////////////////////////////

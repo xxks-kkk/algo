@@ -2,6 +2,7 @@
 #include "assert.h"
 
 void test_chunk_number();
+void test_permutations();
 
 int main()
 {
@@ -9,7 +10,8 @@ int main()
   printf("// UTILITY FUNCTIONS TEST\n");
   printf("///////////////////////\n\n");
 
-  test_chunk_number();
+  test_chunk_number();    printf("=============\n");
+  test_permutations();    printf("=============\n");
   return 0;
 }
 
@@ -57,3 +59,11 @@ test_chunk_number()
   printf("[6:7] digits: %d\n", res);  
 }
 
+void
+test_permutations()
+{
+  printf("TEST: permutations\n");
+  int *array = malloc(5 * sizeof(int));
+  permutation(array, 5);
+  printArray(array, 5);
+}

@@ -44,4 +44,9 @@ int numNodes(BST);
 int numLeaves(BST);
 int numFullNodes(BST);
 
+/*
+ * MAW 4.29 Write a function to generate an N-node random binary search tree with distinct keys 1 through N.
+ */
+BST randBST(int);
+
 #endif
