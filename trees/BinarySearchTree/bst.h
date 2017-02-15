@@ -61,4 +61,36 @@ BST perfectBST(int H);
  */
 void printRangeKeys(BST T, int k1, int k2);
 
+/*
+ * MAW 4.35 Write a routine to list our the nodes of a binary tree in level-order. List the root, then nodes at depth 1,
+ * followed by nodes at depth 2, and so on. You must do this in linear time.
+ */
+void levelOrder(BST);
+
+#endif
+
+
+/*
+ * A simple queue for BST functions
+ */
+#ifndef QUEUE_NODE_H
+#define QUEUE_NODE_H
+
+struct QueueRecord;
+typedef struct QueueRecord* PtrToNode;
+typedef struct QueueCDT* QueueADT; // naming convention: https://www.cs.bu.edu/teaching/c/queue/linked-list/types.html
+
+int isEmpty(QueueADT Q);
+QueueADT createQueue();
+void makeEmptyQueue(QueueADT Q);
+void disposeQueue(QueueADT Q);
+void enqueue(Position elem, QueueADT Q);
+void dequeue(QueueADT Q);
+Position frontAndDequeue(QueueADT Q);
+
+
+
+
+
+
 #endif

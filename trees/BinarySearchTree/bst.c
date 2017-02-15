@@ -265,3 +265,100 @@ printRangeKeys(BST T, int k1, int k2)
       printRangeKeys(T->Right, k1, k2);
   }
 }
+
+////**** We implement a simple Queue here ****////
+struct QueueRecord
+{
+  Position Element;
+  PtrToNode Next;
+};
+
+struct QueueCDT
+{
+  PtrToNode Front;
+  PtrToNode Rear;
+};
+
+int
+isEmpty(QueueADT Q)
+{
+  return Q->Front == Q->Rear;
+}
+
+QueueADT
+createQueue()
+{
+  QueueADT Q = malloc(sizeof(struct QueueCDT));
+  Q->Front = malloc(sizeof(struct QueueRecord));
+  Q->Front->Next = NULL;
+  Q->Rear = Q->Front;
+  return Q;
+}
+
+void
+makeEmptyQueue(QueueADT Q)
+{
+  while(!isEmpty(Q))
+  {
+    dequeue(Q);
+  }
+}
+
+void
+disposeQueue(QueueADT Q)
+{
+  makeEmptyQueue(Q);
+  free(Q->Front);
+  free(Q);
+}
+  
+void
+enqueue(Position elem, QueueADT Q)
+{  
+  PtrToNode tmpNode = malloc(sizeof(struct QueueRecord));
+  tmpNode->Element = elem;
+  tmpNode->Next = NULL;
+  Q->Rear->Next = tmpNode;
+  Q->Rear = tmpNode;
+}
+
+void
+dequeue(QueueADT Q)
+{
+  PtrToNode dummyQ;
+  dummyQ = Q->Front->Next;
+  Q->Front->Next = dummyQ->Next;
+  // we don't want to accidentally delete Q->Rear when there is only one data node left
+  if (dummyQ->Next == NULL) 
+  {
+    Q->Rear = Q->Front;
+  }
+  free(dummyQ);
+}
+
+Position
+frontAndDequeue(QueueADT Q)
+{
+  Position tmp = Q->Front->Next->Element;
+  dequeue(Q);
+  return tmp;
+}
+////**** End of queue implementation ****////
+
+void
+levelOrder(BST T)
+{
+  Position tmp;
+  QueueADT Q = createQueue();
+  enqueue(T, Q); // put the root on queue
+  while (!isEmpty(Q))
+  {
+    tmp = frontAndDequeue(Q);
+    printf("%d,", tmp->Element);
+    if (tmp->Left != NULL)
+      enqueue(tmp->Left, Q);
+    if (tmp->Right != NULL)
+      enqueue(tmp->Right, Q);
+  }
+  disposeQueue(Q);
+}
