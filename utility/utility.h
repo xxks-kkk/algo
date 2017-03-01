@@ -1,6 +1,10 @@
+#include "math.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "math.h"
+#include <fcntl.h>
+#include <string.h>
+#include <time.h>
+
 
 #ifndef BOOLEAN
 #define BOOLEAN
@@ -45,6 +49,12 @@ void permutation(int* array, int length);
 /////////////////////////////////
 // MISC RELATED
 ////////////////////////////////
+
+/* We perform the binary search and 
+ * return the smallest index i in the sorted array such that elem <= a[i]
+ * (or n if there is no such index)
+ */
+int searchElement(int elem, int *a, int n);
 
 /* print array
  */

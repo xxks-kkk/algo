@@ -3,6 +3,7 @@
 
 void test_chunk_number();
 void test_permutations();
+void test_searchElement();
 
 int main()
 {
@@ -12,6 +13,7 @@ int main()
 
   test_chunk_number();    printf("=============\n");
   test_permutations();    printf("=============\n");
+  test_searchElement();   printf("=============\n");
   return 0;
 }
 
@@ -66,4 +68,19 @@ test_permutations()
   int *array = malloc(5 * sizeof(int));
   permutation(array, 5);
   printArray(array, 5);
+}
+
+void
+test_searchElement()
+{
+  printf("TEST: searchElement\n");
+  int array[10] = {0, 4, 5, 6, 20, 21, 50, 79, 81, 100};
+  printf("array: ");
+  printArray(array, 10);
+  printf("Index for 2 is: %d\n", searchElement(2, array, 10));  
+  printf("Index for 4 is: %d\n", searchElement(4, array, 10));
+  printf("Index for 6 is: %d\n", searchElement(6, array, 10));  
+  printf("Index for 20 is: %d\n", searchElement(20, array, 10));
+  printf("Index for 30 is: %d\n", searchElement(30, array, 10));
+  printf("Index for 90 is: %d\n", searchElement(90, array, 10));  
 }

@@ -1,7 +1,4 @@
 #include "utility.h"
-#include <string.h>
-#include <fcntl.h>
-#include <time.h>
 
 long
 random_at_most(long max)
@@ -89,6 +86,28 @@ permutation(int* array, int length)
   // Do the swap trick
   for (i = 1; i < length; i++)
     swap(&array[i], &array[random_at_most(i)]);
+}
+
+int
+searchElement(int elem, int *a, int n)
+{
+  int low, mid, high;
+
+  // invariant: a[lo] < elem <= a[hi]
+  low = -1;
+  high = n;
+
+  while(low + 1 < high)
+  {
+    mid = (low + high) / 2;
+    if (a[mid] == elem)
+      return mid;
+    else if (a[mid] < elem)
+      low = mid;
+    else
+      high = mid;
+  }
+  return high; // we return the index where elem <= a[i]
 }
 
 void
