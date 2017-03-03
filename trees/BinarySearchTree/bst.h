@@ -67,6 +67,13 @@ void printRangeKeys(BST T, int k1, int k2);
  */
 void levelOrder(BST);
 
+/*
+ * MAW 4.41 Two binary trees are similar if they are both empty or both nonempty and have similar left and right subtrees.
+ * Write a function to decide whether two binary trees are similar. 
+ * Return 1 if not similar; 0 if similar
+ */
+int similar(BST, BST);
+
 #endif
 
 
@@ -87,10 +94,5 @@ void disposeQueue(QueueADT Q);
 void enqueue(Position elem, QueueADT Q);
 void dequeue(QueueADT Q);
 Position frontAndDequeue(QueueADT Q);
-
-
-
-
-
 
 #endif

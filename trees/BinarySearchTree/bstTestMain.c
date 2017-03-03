@@ -1,6 +1,7 @@
 #include "bst.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 void generate_dot(BST);
 void delete_tree(BST);
@@ -17,6 +18,7 @@ void test_randBST();
 void test_perfectBST();
 void test_printRangeKeys();
 void test_levelOrder();
+void test_similar();
 
 int
 main()
@@ -37,7 +39,8 @@ main()
   test_randBST();           printf("\n");
   test_perfectBST();        printf("\n");
   test_printRangeKeys();    printf("\n\n");
-  test_levelOrder();        printf("\n");
+  test_levelOrder();        printf("\n\n");
+  test_similar();           printf("\n");
   
   return 0;
 }
@@ -197,4 +200,19 @@ test_levelOrder()
   generate_dot(T);
   levelOrder(T);
   delete_tree(T);
+}
+
+void
+test_similar()
+{
+  printf("TEST: similar\n");
+  BST T_similar1 = perfectBST(2);
+  BST T_similar2 = perfectBST(2);
+  BST T_diff1 = perfectBST(3);
+  assert(similar(T_similar1, T_similar2) == 0);
+  assert(similar(T_similar1, T_diff1) != 0);
+  printf("ALL Pass");
+  delete_tree(T_similar1);
+  delete_tree(T_similar2);
+  delete_tree(T_diff1);
 }

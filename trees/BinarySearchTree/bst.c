@@ -362,3 +362,14 @@ levelOrder(BST T)
   }
   disposeQueue(Q);
 }
+
+int
+similar(BST T1, BST T2)
+{
+  if (T1 == NULL && T2 == NULL)
+    return 0;
+  if ((T1 == NULL && T2 != NULL) || (T1 != NULL && T2 == NULL))
+    return 1;
+  return (similar(T1->Left, T2->Left) && similar(T1->Right, T2->Right));
+}
+  
