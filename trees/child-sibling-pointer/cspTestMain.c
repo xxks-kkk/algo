@@ -1,4 +1,5 @@
 #include "csp.h"
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,6 +7,7 @@ void generate_dot(CSPT);
 //void delete_tree(CSPT);
 void test_insert();
 //void test_delete();
+void test_isomorphic();
 
 int
 main()
@@ -14,7 +16,8 @@ main()
   printf("// CHILD/SIBLING IMPLEMENTATION TREE TEST\n");
   printf("////////////////////////////////////////////\n\n");
   
-  test_insert();
+  test_insert();       printf("\n");
+  test_isomorphic();   printf("\n");
   //test_delete();
   
   return 0;
@@ -75,3 +78,33 @@ test_insert()
 /*   generate_dot(T); */
 /*   delete_tree(T);   */
 /* } */
+
+void
+test_isomorphic()
+{
+  printf("TEST: isomorphic\n");
+  CSPT T1 = NULL;
+  CSPT T2 = NULL;
+  printf("Graph T1:\n");
+  T1 = insert('A', T1, 'A', 0);
+  T1 = insert('B', T1, 'A', 1);
+  T1 = insert('C', T1, 'A', 1);
+  T1 = insert('D', T1, 'B', 1);
+  T1 = insert('E', T1, 'B', 1);
+  T1 = insert('F', T1, 'E', 1);
+  T1 = insert('G', T1, 'C', 1);
+  T1 = insert('H', T1, 'G', 1);
+  generate_dot(T1);
+  printf("Graph T2:\n");
+  T2 = insert('A', T2, 'A', 0);
+  T2 = insert('C', T2, 'A', 1);
+  T2 = insert('B', T2, 'C', 0);
+  T2 = insert('G', T2, 'C', 1);
+  T2 = insert('H', T2, 'G', 1);
+  T2 = insert('E', T2, 'B', 1);
+  T2 = insert('D', T2, 'E', 0);
+  T2 = insert('F', T2, 'E', 1);
+  generate_dot(T2);
+  assert(isomorphic(T1,T2) == 0);
+  printf("All pass!\n");
+}

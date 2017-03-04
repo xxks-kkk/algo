@@ -219,3 +219,34 @@ cspt_print_dot(CSPT T, FILE* stream)
   fprintf(stream,"}\n");
 }
 
+// swap the left child and right child of node T
+// again, we assume each node has only two children: left and right
+void
+treeSwap(CSPT T)
+{
+  Position tmp = T->FirstChild;
+  T->FirstChild = T->FirstChild->NextSibling;
+  T->FirstChild->NextSibling = tmp;
+}
+
+// We assume each node has only two children: left and right
+// O(N)
+int
+isomorphic(CSPT T1, CSPT T2)
+{
+  if (T1 == NULL && T2 == NULL)
+    return 0;
+  if (T1->Element == T2->Element)
+    return 0;
+  if ((T1 != NULL && T2 == NULL) ||
+      (T1 == NULL && T2 != NULL))
+    return 1;
+  if ((T1->FirstChild->Element == T2->FirstChild->Element) &&
+      (T1->FirstChild->NextSibling->Element == T2->FirstChild->NextSibling->Element))
+    return 0;
+  if ((T1->FirstChild->Element != T2->FirstChild->Element) ||
+      (T1->FirstChild->NextSibling->Element != T2->FirstChild->NextSibling->Element))
+    treeSwap(T1);
+  return isomorphic(T1->FirstChild, T2->FirstChild) && isomorphic(T1->FirstChild->NextSibling, T2->FirstChild->NextSibling);
+}
+  

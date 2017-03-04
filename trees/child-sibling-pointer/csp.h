@@ -22,6 +22,12 @@ CSPT delete(ET, CSPT); //TODO: not implemented
 ET retrieve(Position);
 void cspt_print_dot(CSPT, FILE*);
 
+/*
+ * MAW 4.42 Give a polynomial time algorithm to decide if two trees are isomorphic.
+ * Return 1 if not isomorphic; 0 if isomorphic
+ */
+int isomorphic(CSPT, CSPT);
+
 #endif
 
 #ifndef QUEUE_NODE_H
