@@ -19,6 +19,7 @@ void test_perfectBST();
 void test_printRangeKeys();
 void test_levelOrder();
 void test_similar();
+void test_same();
 
 int
 main()
@@ -40,7 +41,8 @@ main()
   test_perfectBST();        printf("\n");
   test_printRangeKeys();    printf("\n\n");
   test_levelOrder();        printf("\n\n");
-  test_similar();           printf("\n");
+  test_similar();           printf("\n\n");
+  test_same();              printf("\n\n");
   
   return 0;
 }
@@ -211,8 +213,21 @@ test_similar()
   BST T_diff1 = perfectBST(3);
   assert(similar(T_similar1, T_similar2) == 0);
   assert(similar(T_similar1, T_diff1) != 0);
-  printf("ALL Pass");
+  printf("All pass");
   delete_tree(T_similar1);
   delete_tree(T_similar2);
   delete_tree(T_diff1);
+}
+
+void
+test_same()
+{
+  printf("TEST: same\n");
+  BST T1 = perfectBST(2);
+  BST T2 = perfectBST(3);
+  assert(same(T1, T1) == 0);
+  assert(same(T1, T2) != 0);
+  printf("All pass");
+  delete_tree(T1);
+  delete_tree(T2);
 }

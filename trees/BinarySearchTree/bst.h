@@ -74,6 +74,8 @@ void levelOrder(BST);
  */
 int similar(BST, BST);
 
+int same(BST T1, BST T2);
+
 #endif
 
 

@@ -372,4 +372,19 @@ similar(BST T1, BST T2)
     return 1;
   return (similar(T1->Left, T2->Left) && similar(T1->Right, T2->Right));
 }
-  
+
+// Determine if the given two trees are identical
+int
+same(BST T1, BST T2)
+{
+  if (T1 == NULL && T2 == NULL)
+    return 0;
+  if ((T1 != NULL && T2 == NULL) ||
+      (T1 == NULL && T2 != NULL))
+    return 1;
+  if (T1->Element == T2->Element)
+    return 0;
+  if (T1->Element != T2->Element)
+    return 1;
+  return same(T1->Left, T2->Left) && same(T1->Right, T2->Right);
+}
