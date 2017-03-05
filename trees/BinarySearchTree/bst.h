@@ -74,7 +74,17 @@ void levelOrder(BST);
  */
 int similar(BST, BST);
 
+/*
+ * Check if two binary search tree are the same in terms of structure and elements
+ */
 int same(BST T1, BST T2);
+
+/*
+ * MAW 4.43 Show that via AVL single rotations, any binary search tree T_1 can be transformed into 
+ * another search tree T_2 (with the same keys)
+ * Return newly transformed T1
+ */
+BST transform(BST T1, BST T2);
 
 #endif
 

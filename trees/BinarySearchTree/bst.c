@@ -388,3 +388,11 @@ same(BST T1, BST T2)
     return 1;
   return same(T1->Left, T2->Left) && same(T1->Right, T2->Right);
 }
+
+
+
+BST
+transform(BST T1, BST T2)
+{
+  return T1;
+}
