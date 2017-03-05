@@ -13,7 +13,11 @@
  * its inorder predecessor, and if a node has a NULL right child, we make its right child
  * point to its inorder successor. This is known as a threaded tree and the extra pointers
  * are called threads.
+ *
+ * The advantage of threaded tree is you can do tree traversals somewhat easier and without recursion. 
+ * The disadvantage is that it reeks of old-style hacking.
  */
+
 #ifndef _TT_H
 #define _TT_H
 
