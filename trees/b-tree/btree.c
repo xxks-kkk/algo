@@ -4,6 +4,7 @@
 
 // Implementation reference:
 // 1. http://www.cs.yale.edu/homes/aspnes/pinewiki/BTrees.html
+// 2. http://ilpubs.stanford.edu:8090/85/1/1995-19.pdf
 
 #define MAX_KEYS (3) // Order of the B-tree
 
