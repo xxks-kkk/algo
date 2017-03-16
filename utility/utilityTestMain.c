@@ -1,9 +1,11 @@
 #include "utility.h"
-#include "assert.h"
+#include <assert.h>
 
 void test_chunk_number();
 void test_permutations();
 void test_searchElement();
+void test_primeList();
+void test_nearestPrime();
 
 int main()
 {
@@ -13,7 +15,9 @@ int main()
 
   test_chunk_number();    printf("=============\n");
   test_permutations();    printf("=============\n");
+  test_primeList();       printf("=============\n");  
   test_searchElement();   printf("=============\n");
+  test_nearestPrime();    printf("=============\n");
   return 0;
 }
 
@@ -68,6 +72,23 @@ test_permutations()
   int *array = malloc(5 * sizeof(int));
   permutation(array, 5);
   printArray(array, 5);
+}
+
+void
+test_primeList()
+{
+  printf("TEST: primeList\n");
+  int* array = primeList(30);
+  printf("The list of primes below %d are: \n", 30);
+  printArray(array,arrayLength(array));
+  free(array);
+}
+
+void
+test_nearestPrime()
+{
+  printf("TEST: nearestPrime\n");
+  printf("Nearest Prime around 20 is: %d\n", nearestPrime(20));
 }
 
 void

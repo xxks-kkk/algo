@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <time.h>
+#include <limits.h>
 
 
 #ifndef BOOLEAN
@@ -17,8 +18,8 @@ typedef enum { false, true } bool;
 
 /* Assumes 0 <= max <= RAND_MAX
  * Returns in the closed interval [0, max]
- * from: http://stackoverflow.com/questions/2509679/how-to-generate-a-random-number-from-within-a-range
  */
+//from: http://stackoverflow.com/questions/2509679/how-to-generate-a-random-number-from-within-a-range
 long random_at_most(long max);
 
 /* count number of digits for a number 
@@ -46,6 +47,20 @@ int max(int a, int b);
 // J. Bentley, "Programming Pearls," Communications of the ACM 30 (1987), 754-757.
 void permutation(int* array, int length);
 
+/*
+ * generate a list of prime numbers that is below given integer n
+ */
+// Algorithm: https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+// Illustration: http://www.geeksforgeeks.org/sieve-of-eratosthenes/
+// Another algorithm: http://www.geeksforgeeks.org/sieve-sundaram-print-primes-smaller-n/ (not used)
+int* primeList(int n);
+
+/* 
+ * Find the nearest Prime greater than the given number n. 
+ */
+// http://www.geeksforgeeks.org/nearest-prime-less-given-number-n/
+int nearestPrime(int n);
+
 /////////////////////////////////
 // MISC RELATED
 ////////////////////////////////
@@ -68,6 +83,11 @@ void printFile(char*);
 /* A function for fatal errors
  */
 void fatal(char *);
+
+/*
+ * Calculate the array Length; check INT_MAX as the end of array marker.
+ */
+int arrayLength(int *);
 
 ////////////////////////////////
 // I/O RELATED

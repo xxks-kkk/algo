@@ -88,6 +88,50 @@ permutation(int* array, int length)
     swap(&array[i], &array[random_at_most(i)]);
 }
 
+int*
+primeList(int n)
+{
+  int p, i, j, k, l;
+  int* N = calloc(n, sizeof(int)); //each cell indicates whether the index number is marked (1) or not (0)
+  j = 0; //keep track of the final result list length
+  for(p = 1; p < n; p++)
+  {
+    while(N[p] != 0 && p < n)
+      p++;
+    if (p >= n)
+      break;
+    j++;
+    for(i = p; i < n; i = i + p + 1)
+    {
+      if(i == p)
+        N[i] = 0;
+      else
+        N[i] = 1;
+    }
+  }
+  int* result = calloc(j+1, sizeof(int));
+  l = 1;
+  for(k = 0; k < j; k++)
+  {
+    result[k] = l+1;
+    l++;
+    while(N[l] != 0)
+      l++;
+  }
+  result[j] = INT_MAX;
+  free(N);
+  return result;
+}
+
+int
+nearestPrime(int n)
+{
+  int* array = primeList(n+10);
+  int result = array[searchElement(n, array, arrayLength(array))];
+  free(array);
+  return result;
+}
+
 int
 searchElement(int elem, int *a, int n)
 {
@@ -148,6 +192,14 @@ fatal(char *message)
   strncat(error_message, message, 83);
   perror(error_message);
   exit(-1);
+}
+
+int
+arrayLength(int * array)
+{
+  int i;
+  for(i = 0; array[i] != INT_MAX; i++);
+  return i;
 }
 
 char*
