@@ -58,7 +58,10 @@ destroyTable(HashTable H)
   int i;
 
   for(i = 0; i < H->TableSize; i++)
+  {
     deleteList(H->TheLists[i]);
+    free(H->TheLists[i]); //free the dummy node
+  }
   free(H);
 }
 
