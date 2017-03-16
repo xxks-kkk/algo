@@ -149,3 +149,42 @@ initializeTableFromArray(int* array,
     insert(array[i], H);
   return H;
 }
+
+// We implement the hash function
+// described in MAW p.151
+static int
+characterHash(char* pattern, int patternLen)
+{
+  int power = 0;
+  int hashVal = 0;
+  for(power = 0; power < patternLen; power++)
+    hashVal += pow(32, power) * (pattern[power] - '\0');
+  return hashVal;
+}
+
+// hashing the pattern string, obtaining a hash value
+// Hp, and comparing this value with the hash value formed
+// from A1A2...Ak, A2A3...Ak+1,A3A4...Ak+2, and so on
+// until AN-k+1AN-k+2...AN. If we have a match of hash values,
+// we compare the strings character by character to verify the match.
+// We return the position (in A) if the string actually do match, and
+// we continue in the unlikely event that the match is false.
+int
+findPattern(char* pattern, char* input)
+{
+  int k = strlen(pattern);  
+  int patternHashValue = characterHash(pattern, k);
+  int tmpHashValue;
+  int n = strlen(input);
+  char tmp[k+1];
+  int i;
+  for(i = 0; i + k <= n; i++)
+  {
+    strncpy(tmp, input+i, k);
+    tmp[k] = '\0';
+    tmpHashValue = characterHash(tmp, k);
+    if (tmpHashValue == patternHashValue && !strcmp(tmp, pattern))
+      return i;
+  }
+  return -1;
+}

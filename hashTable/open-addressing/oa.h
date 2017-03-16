@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "utility.h"
+#include <string.h>
 
 #ifndef _OA_H
 #define _OA_H
@@ -26,5 +27,13 @@ int retrieve(Position P, HashTable H);
 HashTable rehash(HashTable H);
 void printHashTable(HashTable H);
 HashTable initializeTableFromArray(int* array, int arrayLength, int TableSize);
+
+/*
+ * MAW 5.11.d Suppose we want to find the first occurrence of a string p1p2...pk
+ * in a long input string A1A2...AN.
+ * Return the start index of p1 in A1A2...AN
+ */
+int findPattern(char* pattern, char* input);
+
 
 #endif
