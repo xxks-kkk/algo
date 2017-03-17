@@ -18,7 +18,7 @@ struct extendHashTbl
 
 struct LeafEntry
 {
-  char* data;
+  char* Data;
   enum KindOfEntry Info;
 };
 
@@ -39,9 +39,9 @@ initializeExtendHashTable(int M,
     H->Root[i] = malloc(sizeof(struct LeafNode));
     assert(H->Root[i]);
     H->Root[i]->dL = D;
-    H->Root[i]->Element = malloc(M *sizeof(struct LeafEntry));
-    H->Root[i]->numElement = 0;
+    H->Root[i]->Element = malloc(M * sizeof(struct LeafEntry));
     assert(H->Root[i]->Element);
+    H->Root[i]->numElement = 0;    
     for(j = 0; j < H->M; j++)
       H->Root[i]->Element[j].Info = Empty;
   }
@@ -97,7 +97,7 @@ find(char* key,
 static void
 splitAndInsert(char* key, ExtendHashTable H)
 {
-  int numCells, i, idx;
+  int numCells, i, idx, tmp, j;
   H->D++;
   numCells = pow(2, H->D);
   H->Root = realloc(H->Root, numCells * sizeof(LeafPtr));
@@ -105,9 +105,22 @@ splitAndInsert(char* key, ExtendHashTable H)
   idx = find(key, H); // idx where to insert
   for(i = 0; i < numCells; i++)
   {
-    if(i != idx)
-      //TODO: we want to make the new cells point to the existing cell
-      //if they don't trigger the split.
+    if (i != idx && i%2 == 0)
+      tmp = i;
+    if (i != idx && i%2 == 1) 
+      H->Root[i]->Element = H->Root[tmp]->Element;
+    if (i == idx)
+    {
+      H->Root[i]->Element = malloc(M * sizeof(struct LeafEntry));
+      assert(H->Root[i]->Element);
+      H->Root[i]->dL = H->D; // update dL      
+      for(j = 0; j < H->M; j++) // since directory size increases, we may need to move value from old leaf to new leaf
+      {
+        if(H->Root[i-1]->Element[j].Info == Legitimate)
+          insert(H->Root[i-1]->Element[j].Data, H);
+      }
+      insert(key, H); // actually insert new value
+    }
   }
 }
 
@@ -117,11 +130,18 @@ insert(char* key,
 {
   Position loc = find(key, H);
   int hasVal = hash(key, H);
-  if(loc.Element != Legitimate)
+  if(loc.Info != Legitimate)
   {
-    loc.Element = key;
+    loc.Data = key;
+    loc.Info = Legitimate;
     H->Root[hashVal]->numElement++;
   }
   else if (H->Root[hashVal]->numElement == M)
     splitAndInsert(key, H);
+}
+
+void
+printExtendHashTable(ExtendHashTable H)
+{
+
 }
