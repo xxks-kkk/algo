@@ -14,4 +14,8 @@ Solution coverage:
 
 [Chapter 5]
 
-5.3, 5.11.d, 
+5.3, 5.11.d
+
+[Chapter 6]
+
+6.4, 
