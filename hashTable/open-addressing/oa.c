@@ -135,7 +135,12 @@ printHashTable(HashTable H)
 {
   int i;
   for(i = 0; i < H->TableSize; i++)
-    printf("%d|%d\n", i,  H->TheCells[i].Element);  
+  {
+    if(H->TheCells[i].Info == Legitimate)
+      printf("%d|%d\n", i,  H->TheCells[i].Element);
+    else
+      printf("%d|\n", i);
+  }
 }
 
 HashTable
