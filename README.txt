@@ -18,4 +18,4 @@ Solution coverage:
 
 [Chapter 6]
 
-6.4, 
+6.4, 6.5,

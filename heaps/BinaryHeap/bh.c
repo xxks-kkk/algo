@@ -233,7 +233,20 @@ decreaseKey(Position P,
 }
 
 void
-increaseKey(Position P, int delta, BinHeap H);
+increaseKey(Position P,
+            int delta,
+            BinHeap H)
+{
+  if (delta < 0)
+    fatal("delta cannot be negative!");
+  H->Elements[P] += delta;
+  percolateDown(P, H);
+}
 
 void
-delete(Position P, BinHeap H);
+delete(Position P,
+       BinHeap H)
+{
+  decreaseKey(P, INT_MAX-10, H);
+  deleteMinBH(H);
+}

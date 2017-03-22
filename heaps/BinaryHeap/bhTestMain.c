@@ -4,6 +4,8 @@ void generate_dot(BinHeap H);
 void test_initializeBinHeapFromArray(void);
 void test_buildHeap(void);
 void test_decreaseKey(void);
+void test_increaseKey(void);
+void test_delete(void);
 void delete_heap(BinHeap H);
 
 int
@@ -16,6 +18,8 @@ main(void)
   test_initializeBinHeapFromArray(); printf("\n");
   test_buildHeap();                  printf("\n");
   test_decreaseKey();                printf("\n");
+  test_increaseKey();                printf("\n");
+  test_delete();                     printf("\n");
   return 0;
 }
 
@@ -71,4 +75,30 @@ test_decreaseKey()
   decreaseKey(10, 40, H);
   generate_dot(H);
   delete_heap(H);  
+}
+
+void
+test_increaseKey()
+{
+  printf("TEST: increaseKey\n");
+  int test_array[] = {150, 80, 40, 30, 10, 70, 110, 100,
+                     20,  90, 60, 50, 120,140,130};    
+  BinHeap H = buildHeap(test_array, 15);
+  generate_dot(H);  
+  increaseKey(1, 1000, H);
+  generate_dot(H);
+  delete_heap(H);  
+}
+
+void
+test_delete()
+{
+  printf("TEST: delete\n");
+  int test_array[] = {150, 80, 40, 30, 10, 70, 110, 100,
+                     20,  90, 60, 50, 120,140,130};    
+  BinHeap H = buildHeap(test_array, 15);
+  generate_dot(H);
+  delete(1, H);
+  generate_dot(H);
+  delete_heap(H);    
 }
