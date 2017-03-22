@@ -4,11 +4,11 @@ struct HeapStruct
 {
   int Capacity; // maximum heap size
   int Size;     // current heap size
-  ET *Elements; // an array of element
+  int *Elements; // an array of element
 };
 
 BinHeap
-initialize(
+initializeBH(
   int MaxElements)
 {
   BinHeap H;
@@ -17,7 +17,7 @@ initialize(
   assert(H);
 
   // Allocate the array plus one extra for sentinel
-  H->Elements = malloc(sizeof(ET) * (MaxElements + 1));
+  H->Elements = malloc(sizeof(int) * (MaxElements + 1));
   assert(H->Elements);
   H->Capacity = MaxElements;
   H->Size = 0;
@@ -36,7 +36,7 @@ destroyBinHeap(
 
 // We assume the array implementation. We don't touch sentinel.
 void
-makeEmpty(
+makeEmptyBH(
   BinHeap H)
 {
   int i;
@@ -49,7 +49,7 @@ makeEmpty(
 // see MAW p.183
 // percolate up strategy is contained inside the routine
 void
-insert(ET X,
+insertBH(int X,
        BinHeap H)
 {
   int i;
@@ -63,11 +63,11 @@ insert(ET X,
 }
 
 // percolate down strategy is contained inside the routine
-ET
-deleteMin(BinHeap H)
+int
+deleteMinBH(BinHeap H)
 {
   int i, child;
-  ET minElement, lastElement;
+  int minElement, lastElement;
 
   if(isEmpty(H))
   {
@@ -98,8 +98,8 @@ deleteMin(BinHeap H)
   return minElement;
 }
 
-ET
-findMin(BinHeap H)
+int
+findMinBH(BinHeap H)
 {
   return H->Elements[0];
 }
@@ -117,16 +117,15 @@ isFull(BinHeap H)
 }
 
 // Here, we use insert to build Binary Heap
-// TODO: Add O(N) buildHeap routine here as the second option.
 BinHeap
 initializeBinHeapFromArray(
-  ET* array,
+  int* array,
   int arrayLength)
 {
   int i;
-  BinHeap H = initialize(100);
+  BinHeap H = initializeBH(100);
   for(i = 0; i < arrayLength; i++)
-    insert(array[i], H);
+    insertBH(array[i], H);
   return H;
 }
 
@@ -137,9 +136,14 @@ bh_print_dot_aux(BinHeap H,
   int i;
   for(i=1; i*2 <= H->Size; i++)
   {
-    fprintf(stream, "%d->%d;\n", H->Elements[i], H->Elements[2*i]);
+    fprintf(stream, "node%d [label=%d];\n", i, H->Elements[i]);
+    fprintf(stream, "node%d [label=%d];\n", 2*i, H->Elements[2*i]);
+    fprintf(stream, "node%d->node%d;\n", i, 2*i);
     if (i*2 != H->Size)
-      fprintf(stream, "%d->%d\n", H->Elements[i], H->Elements[2*i+1]);
+    {
+      fprintf(stream, "node%d [label=%d];\n", 2*i+1, H->Elements[2*i+1]);      
+      fprintf(stream, "node%d->node%d;\n", i, 2*i+1);
+    }
   }
 }
 
@@ -151,4 +155,85 @@ bh_print_dot(BinHeap H,
   bh_print_dot_aux(H, stream);
   fprintf(stream, "}\n");
 }
+
+static void
+percolateUp(Position pos,
+            BinHeap H)
+{
+  int i;
+  int target = H->Elements[pos];
+  for(i = pos; H->Elements[i/2] > target; i/=2)
+  {
+    H->Elements[i] = H->Elements[i/2];
+  }
+  H->Elements[i] = target;
+}
   
+static void
+percolateDown(Position pos,
+              BinHeap H)
+{
+  int target = H->Elements[pos];
+  int i, child;
+  for(i = pos; 2*i <= H->Size; i = child)
+  {
+    child = 2*i;
+    if (child < H->Size && H->Elements[child] > H->Elements[child+1])
+      child++;
+    if (target > H->Elements[child])
+      H->Elements[i] = H->Elements[child];
+    else
+      break;
+  }
+  H->Elements[i] = target;
+}
+
+BinHeap
+buildHeap(int* array,
+          int arrayLength)
+{
+  BinHeap H = initializeBH(2*arrayLength);
+  
+  // We first construct a complete binary tree
+  int i;
+  for(i = 1; i < arrayLength + 1; i++)
+    H->Elements[i] = array[i-1];
+  H->Size = arrayLength;
+
+#ifdef DEBUG  
+  printf("H->Size: %d\n", H->Size);
+  printArray(H->Elements, H->Size+1);
+#endif
+  
+  // Then we carry out figure 6.14 (p.187) to restore the
+  // binary heap property
+  for( i = H->Size / 2; i > 0; i--)
+  {
+    percolateDown(i, H);
+#ifdef DEBUG
+    printf("After percolateDown(%d):", i);
+    printArray(H->Elements, H->Size+1);
+#endif    
+  }
+  return H;
+}
+
+void
+decreaseKey(Position P,
+            int delta,
+            BinHeap H)
+{
+  if(delta < 0)
+    fatal("delta cannot be negative!");
+#ifdef DEBUG
+  printf("Value at %d: %d\n", P, retrieve(P,T));
+#endif  
+  H->Elements[P] -= delta;
+  percolateUp(P, H);
+}
+
+void
+increaseKey(Position P, int delta, BinHeap H);
+
+void
+delete(Position P, BinHeap H);
