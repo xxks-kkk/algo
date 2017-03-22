@@ -109,12 +109,9 @@ put(int key,
   Position currentPos;
 
   currentPos = find(key, H);
-  if (H->TheCells[currentPos].Info != Legitimate)
-  {
-    H->TheCells[currentPos].Element.Key = key;
-    H->TheCells[currentPos].Element.Value = value;
-    H->TheCells[currentPos].Info = Legitimate;
-  }
+  H->TheCells[currentPos].Element.Key = key;
+  H->TheCells[currentPos].Element.Value = value;
+  H->TheCells[currentPos].Info = Legitimate;
   H->numElements++;
   if(0.1 * H->numElements / H->TableSize >= 0.5) // avoid integer division
     H = rehash(H);

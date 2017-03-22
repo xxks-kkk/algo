@@ -23,6 +23,9 @@ typedef struct HashTbl *HashTable;
 
 HashTable initializeTable(int TableSize);
 void DestroyTable(HashTable H);
+/* NOTE: if the key is already in the table, then we will update the value
+ *       to the given one.
+ */
 HashTable put(int key, int value, HashTable H);
 /* We retrieve the corresponding value from the given key
  */
