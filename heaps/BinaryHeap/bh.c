@@ -101,7 +101,7 @@ deleteMinBH(BinHeap H)
 int
 findMinBH(BinHeap H)
 {
-  return H->Elements[0];
+  return H->Elements[1];
 }
 
 int
