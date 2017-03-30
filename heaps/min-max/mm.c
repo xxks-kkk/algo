@@ -1,5 +1,9 @@
 #include "mm.h"
 
+// NOTE: Implementation reference: "Min-Max Heaps and Generalized Priority Queues"
+// (Atkinson, et. al)
+// http://www.akira.ruc.dk/~keld/teaching/algoritmedesign_f03/Artikler/02/Atkinson86.pdf
+
 static int getDepth(Position pos);
 static void percolateUpMin(Position pos, MinMaxHeap H);
 static void percolateUpMax(Position pos, MinMaxHeap H);
