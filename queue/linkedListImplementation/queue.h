@@ -17,6 +17,9 @@ typedef int ET;
 struct QueueRecord;
 struct QueueCDT;
 typedef struct QueueRecord* PtrToNode;
+
+// CDT: concrete-type-of-a-queue
+// ADT: abstract-type-of-a-queue
 typedef struct QueueCDT* QueueADT; // naming convention: https://www.cs.bu.edu/teaching/c/queue/linked-list/types.html
 
 int isEmpty(QueueADT Q);
