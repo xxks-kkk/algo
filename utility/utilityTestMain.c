@@ -6,6 +6,7 @@ void test_permutations();
 void test_searchElement();
 void test_primeList();
 void test_nearestPrime();
+void test_findMin();
 
 int main()
 {
@@ -18,6 +19,8 @@ int main()
   test_primeList();       printf("=============\n");  
   test_searchElement();   printf("=============\n");
   test_nearestPrime();    printf("=============\n");
+  test_findMin();         printf("=============\n");
+  
   return 0;
 }
 
@@ -104,4 +107,14 @@ test_searchElement()
   printf("Index for 20 is: %d\n", searchElement(20, array, 10));
   printf("Index for 30 is: %d\n", searchElement(30, array, 10));
   printf("Index for 90 is: %d\n", searchElement(90, array, 10));  
+}
+
+void
+test_findMin()
+{
+  printf("TEST: findMin\n");
+  int array[10] = {0, 4, 5, 6, 20, 21, 50, 79, 81, 100};
+  printf("array: ");
+  printArray(array, 10);
+  printf("Min: %d\n", array[findMin(array, 10)]);
 }

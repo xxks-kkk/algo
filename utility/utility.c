@@ -66,9 +66,17 @@ max(int a, int b)
   return b;
 }
 
+int
+min(int a, int b)
+{
+  if (a > b)
+    return b;
+  return a;
+}
+
 // swap the values hold by a and b respectively
 // http://www.cs.utsa.edu/~wagner/CS2213/swap/swap.html
-static void
+void
 swap(int* a, int* b)
 {
   int tmp = *a;
@@ -200,6 +208,34 @@ arrayLength(int * array)
   int i;
   for(i = 0; array[i] != INT_MAX; i++);
   return i;
+}
+
+int
+findMin(int* array, int arrayLength)
+{
+  int minVal = INT_MAX, minIdx = 0;
+  int i;
+  for (i = 0; i < arrayLength; i++)
+    if (array[i] < minVal)
+    {
+      minIdx = i;
+      minVal = array[i];
+    }
+  return minIdx;
+}
+
+int
+findMax(int* array, int arrayLength)
+{
+  int maxVal = INT_MIN, maxIdx = 0;
+  int i;
+  for (i = 0; i < arrayLength; i++)
+    if (array[i] > maxVal)
+    {
+      maxIdx = i;
+      maxVal = array[i];
+    }
+  return maxIdx;
 }
 
 char*

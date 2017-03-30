@@ -10,7 +10,7 @@ void test_printLots();
 void test_intersectionSortedLists();
 void test_unionSortedLists();
 void test_reverseList();
-void test_swap();
+void test_swapLL();
 void test_find();
 void test_deleteNode();
 void test_radixSort();
@@ -36,7 +36,7 @@ int main()
 
   test_reverseList();             printf("\n");
 
-  test_swap();                    printf("\n");
+  test_swapLL();                  printf("\n");
 
   test_find();                    printf("\n");
 
@@ -144,20 +144,20 @@ test_reverseList()
 }
 
 void
-test_swap()
+test_swapLL()
 {
   ET test_L[] = {23, 44, 45, 57, 89, -1};
   List L = initializeList(test_L, 6);
   printf("TEST: swap\n");
-  swap(L, 44);
+  swapLL(L, 44);
   printList(L);
-  swap(L, -1);
+  swapLL(L, -1);
   printList(L);
-  swap(L, 45);
+  swapLL(L, 45);
   printList(L);
   ET test_Q[] = {1,3,2,3,4};
   List Q = initializeList(test_Q, 5);
-  swap(Q, 3);
+  swapLL(Q, 3);
   printList(Q);
   deleteAll(L);
   deleteAll(Q);

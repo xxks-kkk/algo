@@ -41,6 +41,17 @@ int chunk_number(int number, int start, int end);
 int max(int a, int b);
 
 /*
+ * return the smaller value of two input
+ */
+int min(int a, int b);
+
+
+/*
+ * swap values hold by a and b
+ */
+void swap(int* a, int* b);
+
+/*
  * generate a permutation of the given array
  */
 // The algorithm is from MAW 2.7, which references
@@ -88,6 +99,18 @@ void fatal(char *);
  * Calculate the array Length; check INT_MAX as the end of array marker.
  */
 int arrayLength(int *);
+
+/*
+ * return the index of the array which contains 
+ * the minimum element of the array
+ */
+int findMin(int* array, int arrayLength);
+
+/*
+ * return the infex of the array which contains 
+ * the maximum element of the array
+ */
+int findMax(int* array, int arrayLength);
 
 ////////////////////////////////
 // I/O RELATED

@@ -228,7 +228,7 @@ printLots(List L, List P)
 }
 
 void
-swap(List L, ET elem)
+swapLL(List L, ET elem)
 {
   Pos dummyCurrent = L->Next;
   Pos dummyPrev = L->Next;

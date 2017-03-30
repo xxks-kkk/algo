@@ -88,7 +88,7 @@ void printLots(List L, List P);
  * with the following node. If node contains first appearance of the ET elem
  * is the last node, then print "Cannot swap because of the elem is the last node"
  */
-void swap(List L, ET elem);
+void swapLL(List L, ET elem);
 
 /* 3.4 Given two sorted lists, L and P, write a procedure to compute the
  * intersection of two lists using only the basic list operations.
