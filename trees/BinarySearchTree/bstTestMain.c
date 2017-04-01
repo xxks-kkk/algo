@@ -7,8 +7,8 @@ void generate_dot(BST);
 void delete_tree(BST);
 void test_initializeBST();
 void test_find();
-void test_findMin();
-void test_findMax();
+void test_findMinBST();
+void test_findMaxBST();
 void test_insert();
 void test_delete();
 void test_numNodes();
@@ -20,6 +20,7 @@ void test_printRangeKeys();
 void test_levelOrder();
 void test_similar();
 void test_same();
+void test_inorderTraversal();
 
 int
 main()
@@ -30,8 +31,8 @@ main()
   
   test_initializeBST();
   test_find();              printf("\n");
-  test_findMin();           printf("\n");
-  test_findMax();           printf("\n");
+  test_findMinBST();           printf("\n");
+  test_findMaxBST();           printf("\n");
   test_insert();
   test_delete();
   test_numNodes();          printf("\n");
@@ -43,6 +44,7 @@ main()
   test_levelOrder();        printf("\n\n");
   test_similar();           printf("\n\n");
   test_same();              printf("\n\n");
+  test_inorderTraversal();  printf("\n\n");
   
   return 0;
 }
@@ -88,23 +90,23 @@ test_find()
 }
 
 void
-test_findMin()
+test_findMinBST()
 {
-  printf("TEST: findMin\n");
+  printf("TEST: findMinBST\n");
   ET test_array[] = {2,1,3};
   BST T = initializeBST(test_array, 3);
-  Position pos = findMin(T);
+  Position pos = findMinBST(T);
   printf("The min element in the tree: %d\n", retrieve(pos));
   delete_tree(T);
 }  
 
 void
-test_findMax()
+test_findMaxBST()
 {
-  printf("TEST: findMax\n");
+  printf("TEST: findMaxBST\n");
   ET test_array[] = {2,1,3};
   BST T = initializeBST(test_array, 3);
-  Position pos = findMax(T);
+  Position pos = findMaxBST(T);
   printf("The max element in the tree: %d\n", retrieve(pos));
   delete_tree(T);
 }  
@@ -230,4 +232,14 @@ test_same()
   printf("All pass");
   delete_tree(T1);
   delete_tree(T2);
+}
+
+void
+test_inorderTraversal()
+{
+  printf("TEST: inorderTraversal\n");
+  ET test_array[] = {3,1,4};
+  int arrayLength = 3;
+  BST T = initializeBST(test_array, arrayLength);
+  printArray(inorderTraversal(T, &arrayLength), arrayLength);
 }

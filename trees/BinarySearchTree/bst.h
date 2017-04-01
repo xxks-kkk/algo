@@ -17,8 +17,8 @@ typedef Position BST;
 
 BST makeEmpty(BST);
 Position find(ET, BST);
-Position findMin(BST);
-Position findMax(BST);
+Position findMinBST(BST);
+Position findMaxBST(BST);
 BST insert(ET, BST);
 BST delete(ET, BST);
 ET retrieve(Position);
@@ -85,6 +85,13 @@ int same(BST T1, BST T2);
  * Return newly transformed T1
  */
 BST transform(BST T1, BST T2);
+
+/*
+ * Given a binary search tree, return the inorder traversal of its nodes' values
+ * as an array.
+ */
+int* inorderTraversal(BST root, int* returnSize);
+
 
 #endif
 

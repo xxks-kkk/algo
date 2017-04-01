@@ -33,18 +33,18 @@ find(ET elem, BST T)
 }
 
 Position
-findMin(BST T)
+findMinBST(BST T)
 {
   if (T == NULL)
     return NULL;
   else if (T->Left == NULL)
     return T;
   else
-    return findMin(T->Left);
+    return findMinBST(T->Left);
 }
 
 Position
-findMax(BST T)
+findMaxBST(BST T)
 {
   if (T != NULL)
     while (T->Right != NULL)
@@ -87,7 +87,7 @@ delete(ET elem, BST T)
   else // we found the element to be deleted
   if (T->Left != NULL && T->Right != NULL) // two children
   {
-      tmpCell = findMin(T->Right);
+      tmpCell = findMinBST(T->Right);
       T->Element = tmpCell->Element;
       T->Right = delete(T->Element, T->Right);
   }
@@ -389,10 +389,29 @@ same(BST T1, BST T2)
   return same(T1->Left, T2->Left) && same(T1->Right, T2->Right);
 }
 
-
-
 BST
 transform(BST T1, BST T2)
 {
   return T1;
+}
+
+static void
+inorderTraversalHelper(BST root, int** array, int *i)
+{
+  if (root != NULL)
+  {
+    inorderTraversalHelper(root->Left, array, i);
+    *(*array+(*i)++) = root->Element;
+    inorderTraversalHelper(root->Right, array, i);
+  }
+}
+
+int*
+inorderTraversal(BST root,
+                 int* returnSize)
+{
+  int *array = malloc(*returnSize * sizeof(int));
+  int i = 0;
+  inorderTraversalHelper(root, &array, &i);
+  return array;
 }
