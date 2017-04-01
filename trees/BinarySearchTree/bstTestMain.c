@@ -239,7 +239,8 @@ test_inorderTraversal()
 {
   printf("TEST: inorderTraversal\n");
   ET test_array[] = {3,1,4};
-  int arrayLength = 3;
-  BST T = initializeBST(test_array, arrayLength);
-  printArray(inorderTraversal(T, &arrayLength), arrayLength);
+  BST T = initializeBST(test_array, 3);
+  int arrayLength;
+  ET* array = inorderTraversal(T, &arrayLength);
+  printArray(array, arrayLength);
 }

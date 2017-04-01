@@ -410,6 +410,7 @@ int*
 inorderTraversal(BST root,
                  int* returnSize)
 {
+  *returnSize = numNodes(root);
   int *array = malloc(*returnSize * sizeof(int));
   int i = 0;
   inorderTraversalHelper(root, &array, &i);
