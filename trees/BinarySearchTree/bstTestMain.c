@@ -21,6 +21,7 @@ void test_levelOrder();
 void test_similar();
 void test_same();
 void test_inorderTraversal();
+void test_diameterOfBST();
 
 int
 main()
@@ -45,6 +46,7 @@ main()
   test_similar();           printf("\n\n");
   test_same();              printf("\n\n");
   test_inorderTraversal();  printf("\n\n");
+  test_diameterOfBST();     printf("\n\n");
   
   return 0;
 }
@@ -243,4 +245,13 @@ test_inorderTraversal()
   int arrayLength;
   ET* array = inorderTraversal(T, &arrayLength);
   printArray(array, arrayLength);
+}
+
+void
+test_diameterOfBST()
+{
+  printf("TEST: diameterOfBST\n");
+  ET test_array[] = {3,1,4};
+  BST T = initializeBST(test_array, 3);
+  printf("max diameter: %d\n", diameterOfBST(T));
 }

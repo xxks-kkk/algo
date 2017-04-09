@@ -10,3 +10,4 @@ main
 main.dSYM
 *.png
 scratch
+gdb.txt

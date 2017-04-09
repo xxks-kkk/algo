@@ -416,3 +416,33 @@ inorderTraversal(BST root,
   inorderTraversalHelper(root, &array, &i);
   return array;
 }
+
+static int
+diameterOfBSTHelper(BST root, int *maxDiaDepth)
+{
+  if(!root) return 0;
+  int leftDepth = diameterOfBSTHelper(root->Left, maxDiaDepth);
+  int rightDepth = diameterOfBSTHelper(root->Right, maxDiaDepth);
+  int cand = leftDepth + rightDepth;
+  if (cand > *maxDiaDepth) *maxDiaDepth = cand;
+  return max(leftDepth+1, rightDepth+1);
+}
+
+/*
+ * Given a binary tree 
+ *
+ *     1
+ *    / \
+ *   2   3
+ *  / \
+ * 4   5
+ *
+ * Return 3, which is the length of the path [4,2,1,3] or [5,2,1,3].
+ */
+int
+diameterOfBST(BST root)
+{
+  int maxDiaDepth = 0;
+  diameterOfBSTHelper(root, &maxDiaDepth);
+  return maxDiaDepth;
+}
