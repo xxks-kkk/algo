@@ -47,3 +47,17 @@ bubbleSort(int A[], int N)
     }
   }
 }
+
+void
+selectionSort(int A[], int N)
+{
+  int i, j, min;
+  j = min = i = 0;
+  for(; i < N; i++)
+  {
+    for(j = i; j < N; j++)
+      if(A[j] < A[min])
+        min = j;
+    swap(&A[min], &A[i]);
+  } 
+}
