@@ -53,4 +53,11 @@ test_selectionSort(void)
   selectionSort(test, 6);
   printf("After selectionSort: ");
   printArray(test, 6);
+
+  int test2[] = {34};
+  printf("Befor selectionSort: ");
+  printArray(test2, 1);
+  selectionSort(test2, 1);
+  printf("After selectionSort: ");
+  printArray(test2, 1);  
 }

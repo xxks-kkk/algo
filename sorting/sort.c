@@ -53,7 +53,7 @@ selectionSort(int A[], int N)
 {
   int i, j, min;
   j = min = i = 0;
-  for(; i < N; i++)
+  for(; i < N-1; i++)
   {
     for(j = i; j < N; j++)
       if(A[j] < A[min])
