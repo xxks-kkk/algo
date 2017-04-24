@@ -4,6 +4,7 @@
 void test_shellSort(void);
 void test_bubbleSort(void);
 void test_selectionSort(void);
+void test_insertionSort(void);
 
 int
 main(void)
@@ -15,6 +16,7 @@ main(void)
   test_shellSort();     printf("===============\n\n");
   test_bubbleSort();    printf("===============\n\n");
   test_selectionSort(); printf("===============\n\n");
+  test_insertionSort(); printf("===============\n\n");
 
   return 0;
 }
@@ -60,4 +62,16 @@ test_selectionSort(void)
   selectionSort(test2, 1);
   printf("After selectionSort: ");
   printArray(test2, 1);  
+}
+
+void
+test_insertionSort()
+{
+  printf("TEST: insertionSort\n");
+  int test[] = {34,8,64,51,32,21};
+  printf("Befor insertionSort: ");
+  printArray(test, 6);
+  insertionSort(test, 6);
+  printf("After insertionSort: ");
+  printArray(test, 6);  
 }

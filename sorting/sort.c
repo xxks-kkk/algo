@@ -61,3 +61,17 @@ selectionSort(int A[], int N)
     swap(&A[min], &A[i]);
   } 
 }
+
+void
+insertionSort(int A[], int N)
+{
+  int j, P;
+  int tmp;
+  for(P = 1; P < N; P++)
+  {
+    tmp = A[P];
+    for(j = P; j > 0 && tmp < A[j-1]; j--)
+      A[j] = A[j-1];
+    A[j] = tmp;
+  }
+}
