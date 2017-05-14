@@ -67,11 +67,110 @@ insertionSort(int A[], int N)
 {
   int j, P;
   int tmp;
+  int count = 0;
   for(P = 1; P < N; P++)
   {
+    printf("P:%d\n", P);
     tmp = A[P];
     for(j = P; j > 0 && tmp < A[j-1]; j--)
+    {
       A[j] = A[j-1];
+      count++;
+    }
     A[j] = tmp;
+    printf("count: %d\n", count);
+    count = 0;
   }
+}
+
+#define LeftChild(i) (2*(i) + 1)
+
+void
+PercDown(int A[], int i, int N)
+{
+  int child;
+  int tmp;
+
+  for(tmp = A[i]; LeftChild(i) < N; i = child)
+  {
+    child = LeftChild(i);
+    if(child != N-1 && A[child + 1] > A[child])
+      child++;
+    if(tmp < A[child])
+      A[i] = A[child];
+    else
+      break;
+  }
+  A[i] = tmp;
+}
+
+void
+heapSort(int A[], int N)
+{
+  int i;
+
+  for(i = N/2; i >= 0;  i--) // BuildHeap
+    PercDown(A, i, N);
+  for(i = N-1; i > 0; i--)
+  {
+    swap(&A[0], &A[i]); // DeleteMax and move it to the end of array
+    PercDown(A, 0, i);
+  }
+}
+
+
+void
+merge(int A[],
+      int tmpArray[],
+      int lpos, // start of left half
+      int rpos, // start of right half
+      int rightEnd)
+{
+  int i, leftEnd, numElements, tmpPos;
+
+  leftEnd = rpos - 1;
+  tmpPos = lpos;
+  numElements = rightEnd - lpos + 1;
+
+  // main loop
+  while(lpos <= leftEnd && rpos <= rightEnd)
+    if(A[lpos] <= A[rpos])
+      tmpArray[tmpPos++] = A[lpos++];
+    else
+      tmpArray[tmpPos++] = A[rpos++];
+
+  while(lpos <= leftEnd) // Copy rest of first half
+    tmpArray[tmpPos++] = A[lpos++];
+  while(rpos <= rightEnd) // Copy rest of second half
+    tmpArray[tmpPos++] = A[rpos++];
+
+  for(i = 0; i < numElements; i++, rightEnd--) // copy tmpArray back
+    A[rightEnd] = tmpArray[rightEnd];
+}
+
+void
+msort(int A[],
+      int tmpArray[],
+      int left,
+      int right)
+{
+  int center;
+
+  if(left < right)
+  {
+    center = (left + right)/2;
+    msort(A, tmpArray, left, center);
+    msort(A, tmpArray, center+1, right);
+    merge(A, tmpArray, left, center+1, right);
+  }
+}
+
+void
+mergeSort(int A[], int N)
+{
+  int *tmpArray;
+  tmpArray = malloc(N*sizeof(int));
+  assert(tmpArray);
+  msort(A, tmpArray, 0, N-1);
+  free(tmpArray);
 }

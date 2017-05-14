@@ -5,6 +5,8 @@ void test_shellSort(void);
 void test_bubbleSort(void);
 void test_selectionSort(void);
 void test_insertionSort(void);
+void test_heapSort(void);
+void test_mergeSort(void);
 
 int
 main(void)
@@ -17,6 +19,8 @@ main(void)
   test_bubbleSort();    printf("===============\n\n");
   test_selectionSort(); printf("===============\n\n");
   test_insertionSort(); printf("===============\n\n");
+  test_heapSort();      printf("===============\n\n");
+  test_mergeSort();     printf("===============\n\n");
 
   return 0;
 }
@@ -68,10 +72,35 @@ void
 test_insertionSort()
 {
   printf("TEST: insertionSort\n");
-  int test[] = {34,8,64,51,32,21};
+  //int test[] = {34,8,64,51,32,21};
+  int test[] = {64,51,34,32,21,8};  
   printf("Befor insertionSort: ");
   printArray(test, 6);
   insertionSort(test, 6);
   printf("After insertionSort: ");
   printArray(test, 6);  
+}
+
+void
+test_heapSort()
+{
+  printf("TEST: heapSort\n");
+  int test[] = {31,41,59,26,53,58,97};
+  printf("Before heapSort: ");
+  printArray(test, 7);
+  heapSort(test, 7);
+  printf("After heapSort: ");
+  printArray(test, 7);
+}
+
+void
+test_mergeSort()
+{
+  printf("TEST: mergeSort\n");
+  int test[] = {31,41,59,26,53,58,97};
+  printf("Before mergeSort: ");
+  printArray(test, 7);
+  mergeSort(test, 7);
+  printf("After mergeSort: ");
+  printArray(test, 7);
 }
