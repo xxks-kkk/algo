@@ -67,19 +67,19 @@ insertionSort(int A[], int N)
 {
   int j, P;
   int tmp;
-  int count = 0;
+  //int count = 0;
   for(P = 1; P < N; P++)
   {
-    printf("P:%d\n", P);
+    //printf("P:%d\n", P);
     tmp = A[P];
     for(j = P; j > 0 && tmp < A[j-1]; j--)
     {
       A[j] = A[j-1];
-      count++;
+      //count++;
     }
     A[j] = tmp;
-    printf("count: %d\n", count);
-    count = 0;
+    //printf("count: %d\n", count);
+    //count = 0;
   }
 }
 
@@ -173,4 +173,56 @@ mergeSort(int A[], int N)
   assert(tmpArray);
   msort(A, tmpArray, 0, N-1);
   free(tmpArray);
+}
+
+int
+median3(int A[], int Left, int Right)
+{
+  int Center = (Left + Right) / 2;
+
+  if (A[Left] > A[Center])
+    swap(&A[Left], &A[Center]);
+  if (A[Left] > A[Right])
+    swap(&A[Left], &A[Right]);
+  if (A[Center] > A[Right])
+    swap(&A[Center], &A[Right]);
+
+  // Invariant: A[Left] <= A[Center] <= A[Right]
+  swap(&A[Center], &A[Right-1]); // Hide pivot
+  return A[Right-1];             // Return pivot
+}
+
+void
+Qsort(int A[], int Left, int Right)
+{
+  int i, j;
+  int Pivot;
+
+  if (Left + Cutoff <= Right)
+  {
+    Pivot = median3(A, Left, Right);
+    i = Left;
+    j = Right - 1;
+    for(;;)
+    {
+      while( A[++i] < Pivot){}
+      while( A[--j] > Pivot){}
+      if (i < j)
+        swap(&A[i], &A[j]);
+      else
+        break;
+    }
+    swap( &A[i], &A[Right-1]); // Restore pivot
+    
+    Qsort(A, Left, i-1);
+    Qsort(A, i+1, Right);
+  }
+  else // Do an insertion sort on the subarray
+    insertionSort(A+Left, Right-Left+1);
+}
+
+void
+quickSort(int A[], int N)
+{
+  Qsort(A, 0, N-1);
 }

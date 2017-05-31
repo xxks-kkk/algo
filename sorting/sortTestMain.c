@@ -7,6 +7,7 @@ void test_selectionSort(void);
 void test_insertionSort(void);
 void test_heapSort(void);
 void test_mergeSort(void);
+void test_quickSort(void);
 
 int
 main(void)
@@ -21,6 +22,7 @@ main(void)
   test_insertionSort(); printf("===============\n\n");
   test_heapSort();      printf("===============\n\n");
   test_mergeSort();     printf("===============\n\n");
+  test_quickSort();     printf("===============\n\n");
 
   return 0;
 }
@@ -103,4 +105,16 @@ test_mergeSort()
   mergeSort(test, 7);
   printf("After mergeSort: ");
   printArray(test, 7);
+}
+
+void
+test_quickSort()
+{
+  printf("TEST: quickSort\n");
+  int test[] = {8,1,4,9,0,3,5,2,7,6};
+  printf("Before quickSort: ");
+  printArray(test, 10);
+  quickSort(test, 10);
+  printf("After quickSort: ");
+  printArray(test, 10);
 }
