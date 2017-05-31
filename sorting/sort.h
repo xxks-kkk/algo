@@ -3,7 +3,7 @@
 #include <assert.h>
 #include "utility.h"
 
-#define Cutoff (3) // Used in quickSort
+#define Cutoff (3) // Used in quickSort, Qselect
 
 void shellSort(int A[], int N);
 void bubbleSort(int A[], int N);
@@ -12,3 +12,10 @@ void insertionSort(int A[], int N);
 void heapSort(int A[], int N);
 void mergeSort(int A[], int N);
 void quickSort(int A[], int N);
+
+/* Select the kth smallest element from the given array.
+ * Place the kth smallest element in the kth position. 
+ * Because arrays start at 0, this will be index k-1.
+ * NOTE: the original ordering will be destroyed.
+ */
+void Qselect(int A[], int k, int Left, int Right);

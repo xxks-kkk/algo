@@ -8,6 +8,7 @@ void test_insertionSort(void);
 void test_heapSort(void);
 void test_mergeSort(void);
 void test_quickSort(void);
+void test_Qselect(void);
 
 int
 main(void)
@@ -23,6 +24,7 @@ main(void)
   test_heapSort();      printf("===============\n\n");
   test_mergeSort();     printf("===============\n\n");
   test_quickSort();     printf("===============\n\n");
+  test_Qselect();       printf("===============\n\n");
 
   return 0;
 }
@@ -117,4 +119,16 @@ test_quickSort()
   quickSort(test, 10);
   printf("After quickSort: ");
   printArray(test, 10);
+}
+
+void
+test_Qselect()
+{
+  printf("TEST: Qselect\n");
+  int test[] = {8,1,4,9,0,3,5,2,7,6};
+  printf("test array: ");
+  printArray(test, 10);
+  printf("select 3rd smallest element (i.e. 2)\n");
+  Qselect(test, 3, 0, 9);
+  assert(test[2] == 2); 
 }
