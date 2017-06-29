@@ -260,3 +260,23 @@ Qselect(int A[],
   else // Do an insertion sort on the subarray
     insertionSort(A+Left, Right-Left+1);
 }
+
+void
+mergeSortNonRecursive(int A[], int N)
+{
+  int *tmpArray;
+  int subListSize, part1Start, part2Start, part2End;
+
+  tmpArray = malloc(sizeof(int) * N);
+  for(subListSize = 1; subListSize < N; subListSize *= 2)
+  {
+    part1Start = 0;
+    while(part1Start + subListSize < N - 1)
+    {
+      part2Start = part1Start + subListSize;
+      part2End = min(N, part2Start + subListSize - 1);
+      merge(A, tmpArray, part1Start, part2Start, part2End);
+      part1Start = part2End + 1;
+    }
+  }
+}

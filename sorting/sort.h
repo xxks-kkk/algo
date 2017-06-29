@@ -19,3 +19,9 @@ void quickSort(int A[], int N);
  * NOTE: the original ordering will be destroyed.
  */
 void Qselect(int A[], int k, int Left, int Right);
+
+/*
+ * 7.14 How would you implement mergesort without 
+ * using recursion?
+ */
+void mergeSortNonRecursive(int A[], int N);

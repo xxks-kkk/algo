@@ -9,6 +9,7 @@ void test_heapSort(void);
 void test_mergeSort(void);
 void test_quickSort(void);
 void test_Qselect(void);
+void test_mergeSortNonRecursive(void);
 
 int
 main(void)
@@ -25,6 +26,7 @@ main(void)
   test_mergeSort();     printf("===============\n\n");
   test_quickSort();     printf("===============\n\n");
   test_Qselect();       printf("===============\n\n");
+  test_mergeSortNonRecursive();  printf("===============\n\n");
 
   return 0;
 }
@@ -131,4 +133,16 @@ test_Qselect()
   printf("select 3rd smallest element (i.e. 2)\n");
   Qselect(test, 3, 0, 9);
   assert(test[2] == 2); 
+}
+
+void
+test_mergeSortNonRecursive()
+{
+  printf("TEST: mergeSort (non-Recursive)\n");
+  int test[] = {31,41,59,26,53,58,97};
+  printf("Before mergeSort: ");
+  printArray(test, 7);
+  mergeSort(test, 7);
+  printf("After mergeSort: ");
+  printArray(test, 7);  
 }
