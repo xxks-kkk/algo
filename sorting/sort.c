@@ -274,7 +274,12 @@ mergeSortNonRecursive(int A[], int N)
     while(part1Start + subListSize < N - 1)
     {
       part2Start = part1Start + subListSize;
-      part2End = min(N, part2Start + subListSize - 1);
+      part2End = min(N - 1, part2Start + subListSize - 1);
+
+      /* printf("part1Start: %d\n", part1Start); */
+      /* printf("part2Start: %d\n", part2Start); */
+      /* printf("part2End: %d\n", part2End); */
+
       merge(A, tmpArray, part1Start, part2Start, part2End);
       part1Start = part2End + 1;
     }

@@ -142,7 +142,7 @@ test_mergeSortNonRecursive()
   int test[] = {31,41,59,26,53,58,97};
   printf("Before mergeSort: ");
   printArray(test, 7);
-  mergeSort(test, 7);
+  mergeSortNonRecursive(test, 7);
   printf("After mergeSort: ");
   printArray(test, 7);  
 }
