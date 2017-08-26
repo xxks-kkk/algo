@@ -3,6 +3,12 @@
 
 /*
  * Initialize the disjoint set in quick-find algorithm
+ *
+ * NOTE: The implementation is different from MAW's. In MAW, the equivalence
+ * class name is indicated by 0 and thus, during the initialization, all the
+ * S[i] are initialized to 0. However, in this implementation, the equivalence
+ * class name is indicated by the element position. That's why we initialize
+ * S[i] = i.
  */
 void
 initialize(DisjSet S)

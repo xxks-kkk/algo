@@ -13,10 +13,19 @@ typedef int DisjSet[NumSets + 1];
 typedef int SetType;
 typedef int ElementType;
 
+/*
+ * Initialize the disjoint set
+ */
 void initialize(DisjSet);
 
 /*
  * Replace equivalence classes containing two elements with their union
+ *
+ * NOTE: there are some minor changes compared to MAW:
+ * 1. Unlike MAW implementation, we pass in two elements instead of the
+ *    actual class name (i.e., root if we use quick-union implementation)
+ * 2. Unlike MAW, we merge the equvalience class containing 1st element into
+ *    equivalence class containing 2nd element.
  */
 void setUnion(DisjSet, ElementType, ElementType);
 
