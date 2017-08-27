@@ -13,7 +13,13 @@
  * goes up by one). Thus, union-by height is a trivial modification of union-by-size.
  *
  * We implement union-by-size in this source file. Union-by-height implementation
- * see MAW p.271
+ * see MAW p.271.
+ *
+ * Like union-by-size as a way to imrpove union operation, path compression is 
+ * a way to improve find operation. The effect of path compression is that
+ * every node on the path from X to the root has its parent changed to the root.
+ * Path compression is independent of the strategy used to perform Unions. In other
+ * words, we can use path compression in combination with union-by-size or union-by-height.
  */
 
 /*
@@ -34,7 +40,12 @@ initialize(DisjSet S)
 }
 
 /*
- * Implements find operation in smart-union algorithm
+ * Implements find operation in path compression
+ *
+ * NOTE: The only change to the Find routine is that S[X] is made equal to 
+ *       the value returned by Find; thus after the root of the set is found
+ *       recursively, X is made to point directly to it. This occurs recursively
+ *       to every node on the path to the root, so this implements path compression.
  */
 SetType
 find(ElementType X, DisjSet S)
@@ -42,7 +53,7 @@ find(ElementType X, DisjSet S)
   if (S[X] <= 0)
     return X;
   else
-    return find(S[X], S);
+    return S[X] = find(S[X], S);
 }
 
 /*

@@ -16,15 +16,24 @@ main(void)
   printf("Union 0-5\n"); setUnion(S, 0, 5);
   printf("Union 1-9\n"); setUnion(S, 1, 9);
   printf("the connected components are: \n");
-  printArray(S, NumSets);  // 6, 2, 8, 4, -2, 6, -3, 8, -5, 8,
+  printArray(S, NumSets);  // with union-by-size only: 6, 2, 8, 4, -2, 6, -3, 8, -5, 8,
+                           // union-by-size with path compression: 6, 8, 8, 4, -2, 6, -3, 8, -5, 8,
   /*
-   * Visualization of the result of union operations above
+   * Visualization of the result of union operations above 
+   * with union-by-size only:
    *
    *     4     6          8
    *    /     /          / |\
    *   3     5          7  9 2
-   *        /                |
-   *       0                 1
+   *        /                 \
+   *       0                   1
+   * with union-by-size and path compression:
+   * 
+   *    4        6          8
+   *   /        /          /|\ \
+   *  3        5          7 9 2 1
+   *          /
+   *         0
    */
   return 0;
 }
