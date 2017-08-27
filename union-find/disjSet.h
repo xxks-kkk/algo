@@ -25,7 +25,9 @@ void initialize(DisjSet);
  * 1. Unlike MAW implementation, we pass in two elements instead of the
  *    actual class name (i.e., root if we use quick-union implementation)
  * 2. Unlike MAW, we merge the equvalience class containing 1st element into
- *    equivalence class containing 2nd element.
+ *    equivalence class containing 2nd element. This statement holds for 
+ *    quick-find, quick-union and not true for smart-union (union-by-size)
+ *    and path compression.
  */
 void setUnion(DisjSet, ElementType, ElementType);
 
